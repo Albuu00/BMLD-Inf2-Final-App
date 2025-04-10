@@ -1,95 +1,54 @@
 # 🗺️ Produkt-Roadmap – Selbstmanagement-App
 
-## 1. Zielsetzung und Kontext
+---
 
-**Ziel der App:**  
-Die App soll jungen Berufstätigen (z.B. unsere 24-jährige Persona) dabei helfen, mehr Struktur, Routinen und Selbstmotivation in ihren Alltag zu integrieren.  
-Sie richtet sich an Nutzer, die ihre täglichen Aufgaben (wie Sport, Mealprep, etc.) besser managen möchten – ohne sich durch zu viele Funktionen überfordert zu fühlen.
+## 🎯 Ziel der App
 
-**Kernaussagen:**  
-- Unterstützung bei der Etablierung von Routinen  
-- Visuelle Rückmeldung über Fortschritte  
-- Erhöhung der Selbstmotivation durch Gamification-Elemente
+Unsere App hilft jungen Erwachsenen, wie z.B. unserem IT-Supporter (24), mehr Struktur und gesunde Routinen in den Alltag zu bringen – ohne Druck, aber mit Motivation und positiven Verstärkungen.  
+Der Fokus liegt auf Übersichtlichkeit, Reflexion und kleinen Erfolgen.
 
 ---
 
-## 2. MVP – Minimal Viable Product
+## 🛠️ MVP – Minimal Viable Product (erste Version)
 
-Für die erste Version (MVP) konzentrieren wir uns auf die folgenden Kernfunktionen:
-
-- **ToDo-Verwaltung:**  
-  Erstellen, bearbeiten und abhaken von täglichen Aufgaben, die eine klare Übersicht ermöglichen.
-
-- **Tagesansicht:**  
-  Anzeige von Datum und Wochentag zur besseren zeitlichen Zuordnung der Aufgaben.
-
-- **Einfache Statistik:**  
-  Visualisierung der erledigten Aufgaben (z. B. als Balkendiagramm) zur Motivation und Rückmeldung.
-
-- **Erinnerungsfunktion:**  
-  Sanfte Push-Benachrichtigungen für wichtige Routinen, damit nichts vergessen wird.
-
-- **Positive Verstärkung:**  
-  Animationen oder kleine Erfolgsmeldungen beim Erfüllen von Aufgaben, um die Motivation zu steigern.
+- 🏠 **Startseite mit Tages-ToDos** (inkl. 📅 Datum & 📆 Wochentag)
+- ➕ **ToDos hinzufügen, bearbeiten & als erledigt ✅ markieren**
+- 📊 **Einfache Erfolgsanzeige** (z.B. Tagesbalken/Graph)
+- 🔔 **Sanfte Erinnerungsfunktion** für Routinen
+- 🎉 **Positive Verstärkung beim Erledigen** (z.B. kleine Animation/Meldung)
+- 🧭 **Navigation** zwischen ToDo, Statistik & Profilansicht
 
 ---
 
-## 3. Backlog – Erweiterte Funktionen (Langfristige Vision)
+## 🚀 Nächste Iteration (nach MVP)
 
-Nach dem erfolgreichen Start des MVP sollen folgende Funktionen iterativ erweitert werden:
-
-- **Mini-Tagebuch:**  
-  Möglichkeit, den Tag in einem Kurz-Tagebuch zu reflektieren (Freitext oder Emoji-Auswahl).
-
-- **Personalisierung:**  
-  Anpassung der App mit Nutzerprofilen, wobei der Nutzername auf allen relevanten Seiten sichtbar ist.
-
-- **Wiederkehrende Aufgaben:**  
-  Automatisierung und Wiederholung regelmäßiger Routinen (z.B. wöchentliches Mealprep).
-
-- **Erweiterte Statistik:**  
-  Detaillierte Auswertungen (Wochen-, Monatsverlauf, Streaks) für einen tieferen Einblick in den Fortschritt.
-
-- **Navigation und Usability:**  
-  Überarbeitung der Navigation (z.B. Pfeile zwischen Unterseiten, intuitive Platzierung des Nutzerprofils)  
-  und Anpassung unklarer Bereiche (z.B. die Ansicht mit dem pinken Stern) gemäß Nutzerfeedback.
-
-- **Verknüpfungen zu externen Inhalten:**  
-  Einbindung von YouTube-Videos, um direkt Tipps zu Fitness, Kochen oder Motivation zugänglich zu machen.
+- 📓 **Mini-Tagebuchfunktion** mit Textfeld oder 😄 Emojis
+- 👤 **Benutzername** auf allen Unterseiten anzeigen
+- 🔄 **Bessere Navigation** (z.B. ⬅️➡️ Pfeile zwischen Seiten)
+- 🔁 **Wiederkehrende Routinen planen** (z.B. „jeden Montag Mealprep“)
+- 📈 **Statistikseite mit Wochen-/Monatsverlauf & Streaks**
 
 ---
 
-## 4. Learnings aus dem ersten Nutzertest
+## 🌟 Nice-to-have (später)
 
-- **Positives Feedback:**  
-  - Die Übersicht der ToDos und der visuelle Statistikbereich wurden besonders gelobt.
-  
-- **Verbesserungspotenzial:**  
-  - **Datum & Wochentag:** Müssen in der Tagesübersicht klar dargestellt werden.  
-  - **Nutzername:** Soll konsistent auf den relevanten Seiten (insbesondere bei markierten Elementen) sichtbar sein.  
-  - **Navigation:** Es fehlt an durchgängigen Pfeilen/Buttons zwischen den einzelnen Ansichten; hier sollte geprüft werden, ob eine zentrale Navigationsleiste besser funktioniert.  
-  - **Unklare Bereiche:** Die Ansicht mit dem pinken Stern muss intuitiver gestaltet oder besser erklärt werden.
-
-- **Neue Ideen der Nutzer:**  
-  - Integration eines Mini-Tagebuchs zum Festhalten des Tagesgefühls (durch Texteingabe oder Smileys).
+- 🎯 **Zielverfolgung** (z.B. „3x pro Woche Sport“) mit Fortschrittsanzeige
+- 📹 **YouTube-Integration** für motivierende Inhalte (z.B. Fitness, Rezepte)
+- 🧑‍🎨 **Personalisierung** durch Avatar & Nutzerprofil
+- 🌙 **Dark Mode** für Abendroutine
+- 📤 **Social Sharing** von Erfolgen oder Routinen
 
 ---
 
-## 5. Zeitplan und Roadmap
+## 📅 Zeitplanung (optional)
 
-| Phase | Zeitraum       | Fokus und Meilensteine                                          |
-|-------|----------------|-----------------------------------------------------------------|
-| **1. Phase** | KW 14 – KW 15 | Entwicklung der MVP-Kernfunktionen (ToDo-Verwaltung, Tagesansicht, einfache Statistik, Erinnerungsfunktion) |
-| **2. Phase** | KW 16 – KW 17 | Durchführung erster Nutzertests, gezielte Usability-Optimierungen (Datum, Nutzername, Navigation) |
-| **3. Phase** | KW 18 – KW 19 | Integration von Erweiterungsfunktionen (Mini-Tagebuch, Wiederkehrende Aufgaben) |
-| **4. Phase** | KW 20 – KW 21 | Erweiterte Statistik-Funktionen und Personalisierung, weitere Feinanpassungen |
-| **5. Phase** | KW 22 – KW 23 | Abschluss-Optimierungen, finale Tests, Vorbereitung für den produktiven Einsatz und Deployment |
-
----
-
-## 6. Fazit
-
-Das MVP fokussiert sich auf die wesentlichen Funktionen, die den Nutzern sofortigen Mehrwert bieten: klare Aufgabenübersicht, visuelles Feedback und eine motivierende Nutzerführung. Weiterhin werden basierend auf Nutzerfeedback und Tests gezielt Features erweitert, sodass in zukünftigen Versionen ein umfassendes Selbstmanagement-Tool entsteht.
+| Zeitraum  | 🧩 Ziel/Funktion                                         |
+|-----------|----------------------------------------------------------|
+| Woche 1   | 🏁 Startseite, ToDo-Liste, Erinnerungsfunktion           |
+| Woche 2   | 📊 Erfolgsgrafik, Navigation                             |
+| Woche 3   | 📓 Tagebuchfunktion, 👤 Benutzernamenanzeige             |
+| Woche 4   | 🛠️ Feinschliff MVP, 🧪 erster Nutzertest                 |
+| Danach    | 🚀 Erweiterungen basierend auf Feedback (z.B. Streaks)  |
 
 ---
 
