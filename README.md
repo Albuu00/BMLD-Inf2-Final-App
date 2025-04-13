@@ -1,4 +1,8 @@
-# BMLD-Inf2-BMICalcV3
-Full blown example of BMI Calculator with user specific login
+# BMLD-Inf2-Final-App
+HealthySync - eine Reminder App, um gesunde Routinen/Verhalten im Alltag einzubauen
 
-Link to the app: https://bmi-rechner-v3.streamlit.app
+Entwickelt von:
+- Albulena Ibishi (ibishalb@student.zhaw.ch)
+- Simona Flachsmann (flachsim@students.zhaw.ch)
+- Aylin Ago (agoayl01@students.zhaw.ch)
+
