@@ -1,38 +1,34 @@
-# ====== Start Init Block ======
-# This needs to copied on top of the entry point of the app (Start.py)
-
 import pandas as pd
 from utils.data_manager import DataManager
 from utils.login_manager import LoginManager
 
-# initialize the data manager
-data_manager = DataManager(fs_protocol='webdav', fs_root_folder="BMLD_App_DB")  # switch drive 
+# Initialisierung des Data Managers (hier mit Verbindung zu SwitchDrive)
+data_manager = DataManager(fs_protocol='webdav', fs_root_folder="Albumona") 
 
 # initialize the login manager
 login_manager = LoginManager(data_manager)
 login_manager.login_register()  # open login/register page
 
-# load the data from the persistent storage into the session state
+# Laden der Daten
 data_manager.load_user_data(
     session_state_key='data_df', 
     file_name='data.csv', 
     initial_value = pd.DataFrame(), 
     parse_dates = ['timestamp']
     )
-# ====== End Init Block ======
 
-# ------------------------------------------------------------
-# Here starts the actual app, which was developed previously
 import streamlit as st
 
-st.title('HealthySync')
+# !! WICHTIG: Eure Emails müssen in der App erscheinen!!
 
-name = st.session_state.get('name')
-st.markdown(f"✨ Hallo {name}! ✨")
-st.markdown("🏃 Die Anwendung ermöglicht es Ihnen, Ihren BMI zu berechnen und im Zeitverlauf zu verfolgen 📊")
-        
-# Add some health advice
-st.info("""Der BMI ist ein Screening-Tool, aber keine Diagnose für Körperfett oder Gesundheit. 
-Bitte konsultieren Sie einen Arzt für eine vollständige Beurteilung.""")
+st.title("Meine erste Streamlit App")
 
-st.write("Diese App wurde von Albulena Ibishi (ibishalb@students.zhaw.ch), Simona Flachsmann (flachsim@students.zhaw.ch) und Aylin Ago (agoayl01@students.zhaw.ch) an der ZHAW entwickelt.")
+# Streamlit über den Text unten direkt in die App - cool!
+"""
+Diese App wurde von folgenden Personen entwickelt:
+- Albulena Ibishi (ibishalb@students.zhaw.ch)
+- Simona Flachsmann (flachsim@students.zhaw.ch)
+- Aylin Ago (agoayl01@students.zhaw.ch)
+
+Diese App ist ein Notenrechner.
+""" 

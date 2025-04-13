@@ -1,9 +1,6 @@
 Nutzertest 1:
 Hypothese: Wir möchten wissen, wie klar die jeweiligen Unterseiten unserer App für den Nutzer sind und was für eine einfachere Nutzung fehlt, z.B. Buttons, Beschreibungen, Titel, etc... Wir wollen ausserdem noch testen, ob der Nutzer überhaupt die schon vorhandenen Features als sinnvoll erachtet oder nicht? 
 
-Protokoll Nutzertest 1:
-...
-
 Bewertung Nutzertest 1: 
 - Was war gut? Overall die Unterseiten findet der Nutzer gut, v.a. die Anzeige der erledigten Todos als Graph fand er sehr eindrücklich
 - Was war schlecht? Auf der ersten Unterseite mit der Auflistung der Todos fehlt das Datum und der Wochentag, das fand der Nutzer nicht so gut. Er fand es nicht so gut, dass der Nutzernanme bei der mit dem blauen Stern markierten Unterseite nicht zu sehen war.
