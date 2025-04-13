@@ -35,4 +35,4 @@ st.markdown("🏃 Die Anwendung ermöglicht es Ihnen, Ihren BMI zu berechnen und
 st.info("""Der BMI ist ein Screening-Tool, aber keine Diagnose für Körperfett oder Gesundheit. 
 Bitte konsultieren Sie einen Arzt für eine vollständige Beurteilung.""")
 
-st.write("Diese App wurde von Samuel Wehrli im Rahmen des Moduls 'BMLD Informatik 2' an der ZHAW entwickelt.")
+st.write("Diese App wurde von Albulena Ibishi (ibishalb@students.zhaw.ch), Simona Flachsmann (flachsim@students.zhaw.ch) und Aylin Ago (agoayl01@students.zhaw.ch) an der ZHAW entwickelt.")
