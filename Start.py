@@ -21,7 +21,7 @@ import streamlit as st
 
 # !! WICHTIG: Eure Emails müssen in der App erscheinen!!
 
-st.title("Meine erste Streamlit App")
+st.title("HealthySync")
 
 # Streamlit über den Text unten direkt in die App - cool!
 """
@@ -30,5 +30,5 @@ Diese App wurde von folgenden Personen entwickelt:
 - Simona Flachsmann (flachsim@students.zhaw.ch)
 - Aylin Ago (agoayl01@students.zhaw.ch)
 
-Diese App ist ein Notenrechner.
+Diese App ist ein Todo Reminder.
 """ 
