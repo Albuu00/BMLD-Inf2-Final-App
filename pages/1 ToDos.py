@@ -1,3 +1,10 @@
+from datetime import datetime
+# ====== Start Login Block ======
+from utils.login_manager import LoginManager
+from utils.data_manager import DataManager
+LoginManager().go_to_login('Start.py') 
+# ====== End Login Block ======
+
 import streamlit as st
 
 # Initiale To-Do-Liste
