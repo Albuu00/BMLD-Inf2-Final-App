@@ -30,6 +30,3 @@ for i, todo in enumerate(st.session_state.todos):
             )
         else:
             st.markdown(todo["task"])
-
-
-)
