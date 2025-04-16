@@ -14,7 +14,6 @@ Der Fokus liegt auf Übersichtlichkeit, Reflexion und kleinen Erfolgen.
 - 🏠 **Startseite mit Tages-ToDos** (inkl. 📅 Datum & 📆 Wochentag)
 - ➕ **ToDos hinzufügen, bearbeiten & als erledigt ✅ markieren**
 - 📊 **Einfache Erfolgsanzeige** (z.B. Tagesbalken/Graph)
-- 🔔 **Sanfte Erinnerungsfunktion** für Routinen
 - 🎉 **Positive Verstärkung beim Erledigen** (z.B. kleine Animation/Meldung)
 - 🧭 **Navigation** zwischen ToDo, Statistik & Profilansicht
 
