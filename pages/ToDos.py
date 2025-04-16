@@ -12,40 +12,17 @@ st.title("To-Do Liste")
 # Funktion zum Abhaken von Aufgaben
 def toggle_task(index):
     st.session_state.todos[index]["completed"] = not st.session_state.todos[index]["completed"]
-    # Seite neu laden
-    st.experimental_set_query_params()  # Aktualisiert die Seite
 
 # To-Do-Liste anzeigen
 for i, todo in enumerate(st.session_state.todos):
     col1, col2 = st.columns([0.1, 0.9])
     with col1:
-        # Checkbox mit grünem Haken
+        # Checkbox zum Abhaken
         if st.checkbox("", value=todo["completed"], key=f"todo_{i}"):
             toggle_task(i)
     with col2:
         # Aufgabe anzeigen (grau, wenn abgehakt)
         if todo["completed"]:
-            st.markdown(
-                f"<span style='color: gray; text-decoration: line-through;'>{todo['task']}</span>",
-                unsafe_allow_html=True,
-            )
+            st.markdown(f"<span style='color: gray; text-decoration: line-through;'>{todo['task']}</span>", unsafe_allow_html=True)
         else:
             st.markdown(todo["task"])
-
-# CSS für grüne Checkbox
-st.markdown(
-    """
-    <style>
-    div[data-testid="stCheckbox"] > div:first-child {
-        background-color: #28a745;  /* Grün */
-        border-radius: 4px;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
-
-        
-
-        
