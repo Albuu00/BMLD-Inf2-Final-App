@@ -14,25 +14,22 @@ def toggle_task(index):
     st.session_state.todos[index]["completed"] = not st.session_state.todos[index]["completed"]
 
 # To-Do-Liste anzeigen
-selected_tasks = st.multiselect(
-    "Wähle die Aufgaben aus, die du abhaken möchtest:",
-    options=[todo["task"] for todo in st.session_state.todos],
-    default=[todo["task"] for todo in st.session_state.todos if todo["completed"]],
-)
-
-# Aktualisiere den Status der Aufgaben basierend auf der Auswahl
 for i, todo in enumerate(st.session_state.todos):
-    if todo["task"] in selected_tasks:
-        todo["completed"] = True
-    else:
-        todo["completed"] = False
+    col1, col2 = st.columns([0.1, 0.9])
+    with col1:
+        # Checkbox mit grünem Haken
+        if st.checkbox("", value=todo["completed"], key=f"todo_{i}"):
+            toggle_task(i)
+            st.experimental_rerun()  # Aktualisiert die Liste sofort
+    with col2:
+        # Aufgabe anzeigen (grau, wenn abgehakt)
+        if todo["completed"]:
+            st.markdown(
+                f"<span style='color: gray; text-decoration: line-through;'>{todo['task']}</span>",
+                unsafe_allow_html=True,
+            )
+        else:
+            st.markdown(todo["task"])
 
-# Aufgaben anzeigen
-for todo in st.session_state.todos:
-    if todo["completed"]:
-        st.markdown(
-            f"<span style='color: gray; text-decoration: line-through;'>{todo['task']}</span>",
-            unsafe_allow_html=True,
-        )
-    else:
-        st.markdown(todo["task"])
+
+)
