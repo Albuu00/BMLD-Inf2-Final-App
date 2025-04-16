@@ -3,7 +3,7 @@ from utils.data_manager import DataManager
 from utils.login_manager import LoginManager
 
 # Initialisierung des Data Managers (hier mit Verbindung zu SwitchDrive)
-data_manager = DataManager(fs_protocol='webdav', fs_root_folder="Albumona") 
+data_manager = DataManager(fs_protocol='webdav', fs_root_folder="BMLD_App_DB") 
 
 # initialize the login manager
 login_manager = LoginManager(data_manager)
@@ -32,3 +32,11 @@ Diese App wurde von folgenden Personen entwickelt:
 
 Diese App ist ein Todo Reminder.
 """ 
+if st.button("Todos"):
+    st.switch_page("pages/1 ToDos.py")
+if st.button("Daily Diary"):
+    st.switch_page("pages/2 Daily Diary.py")
+if st.button("Daten"):
+    st.switch_page("pages/3 Daten.py")
+if st.button("Grafik"):
+    st.switch_page("pages/4 Grafik.py")
