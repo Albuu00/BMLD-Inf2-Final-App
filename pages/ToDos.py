@@ -12,6 +12,8 @@ st.title("To-Do Liste")
 # Funktion zum Abhaken von Aufgaben
 def toggle_task(index):
     st.session_state.todos[index]["completed"] = not st.session_state.todos[index]["completed"]
+    # Seite neu laden
+    st.experimental_set_query_params()  # Aktualisiert die Seite
 
 # To-Do-Liste anzeigen
 for i, todo in enumerate(st.session_state.todos):
@@ -20,7 +22,6 @@ for i, todo in enumerate(st.session_state.todos):
         # Checkbox mit grünem Haken
         if st.checkbox("", value=todo["completed"], key=f"todo_{i}"):
             toggle_task(i)
-            st.experimental_rerun()  # Aktualisiert die Liste sofort
     with col2:
         # Aufgabe anzeigen (grau, wenn abgehakt)
         if todo["completed"]:
