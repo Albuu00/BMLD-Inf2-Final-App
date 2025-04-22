@@ -10,7 +10,7 @@ import requests
 
 # OpenWeatherMap API-Schlüssel und Basis-URL
 API_KEY = "dein_api_schlüssel"  # Ersetze dies durch deinen OpenWeatherMap-API-Schlüssel
-BASE_URL = https://api.openweathermap.org/data/2.5/weather?q=Zurich&appid=dein_api_schlüssel&units=metric&lang=de
+BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q=Zurich&appid=dein_api_schlüssel&units=metric&lang=de"
 
 # Funktion, um Wetterdaten abzurufen
 def get_weather(city="Zurich"):
