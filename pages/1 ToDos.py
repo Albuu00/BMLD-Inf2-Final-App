@@ -7,6 +7,44 @@ LoginManager().go_to_login('Start.py')
 
 import streamlit as st
 
+# OpenWeatherMap API-Schlüssel und Basis-URL
+API_KEY = "dein_api_schlüssel"  # Ersetze dies durch deinen OpenWeatherMap-API-Schlüssel
+BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
+
+# Funktion, um Wetterdaten abzurufen
+def get_weather(city="Zurich"):
+    params = {
+        "q": city,
+        "appid": API_KEY,
+        "units": "metric",
+        "lang": "de"
+    }
+    response = requests.get(BASE_URL, params=params)
+    if response.status_code == 200:
+         return response.json()
+    else:
+        return None
+
+# Funktion, um eine Wetteraussage zu generieren
+def generate_weather_message(weather_data):
+    if not weather_data:
+        return "Wetterdaten konnten nicht abgerufen werden."
+    
+    weather = weather_data["weather"][0]["description"]
+    temp = weather_data["main"]["temp"]
+
+    if "sonnig" in weather or "klar" in weather:
+        return f"Heute ist es schön sonnig draußen mit {temp}°C. Ein perfekter Tag, um draußen etwas zu unternehmen!"
+    elif "regen" in weather or "nass" in weather:
+        return f"Heute regnet es stark mit {temp}°C. Eine super Gelegenheit, um es sich zu Hause gemütlich zu machen!"
+    elif "bewölkt" in weather:
+        return f"Heute ist es bewölkt mit {temp}°C. Vielleicht ein guter Tag für einen Spaziergang!"
+    else:
+        return f"Das Wetter heute: {weather} mit {temp}°C. Mach das Beste daraus!"
+
+# Wetterdaten abrufen
+weather_data = get_weather()
+
 # Initiale To-Do-Liste
 if "todos" not in st.session_state:
     st.session_state.todos = [
