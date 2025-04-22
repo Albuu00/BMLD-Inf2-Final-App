@@ -20,9 +20,9 @@ def get_weather(city="Zurich"):
         "units": "metric",
         "lang": "de"
     }
-response = requests.get(BASE_URL, params=params)
-st.write(response.status_code)  # Zeigt den HTTP-Statuscode an
-st.write(response.json())  # Zeigt die Antwort der API an (falls verfügbar)
+    response = requests.get(BASE_URL, params=params)
+    st.write(response.status_code)  # Zeigt den HTTP-Statuscode an
+    st.write(response.json())  # Zeigt die Antwort der API an (falls verfügbar)
     if response.status_code == 200:
         return response.json()
     else:
