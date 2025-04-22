@@ -9,7 +9,7 @@ import streamlit as st
 import requests
 
 # OpenWeatherMap API-Schlüssel und Basis-URL
-API_KEY = "d152df89437cb458b2fc102390b87d40"  # Ersetze dies durch deinen OpenWeatherMap-API-Schlüssel
+API_KEY = "b08ff895beacec99a194e0aa80c2aac4"  # Ersetze dies durch deinen OpenWeatherMap-API-Schlüssel
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
 # Funktion, um Wetterdaten abzurufen
 def get_weather(city="Zurich"):
