@@ -22,7 +22,7 @@ def get_weather(city="Zurich"):
     }
     response = requests.get(BASE_URL, params=params)
     if response.status_code == 200:
-         return response.json()
+        return response.json()
     else:
         return None
 
@@ -46,6 +46,17 @@ def generate_weather_message(weather_data):
 # Wetterdaten abrufen
 weather_data = get_weather()
 
+# Aktuelles Datum, Wochentag und Uhrzeit
+current_time = datetime.now().strftime("%A, %d. %B %Y, %H:%M:%S")
+
+# Titel der Seite mit Datum und Zeit
+st.title(f"To-Do Liste  |  {current_time}")
+
+# Wetterbericht anzeigen
+st.subheader("Wetterbericht")
+weather_message = generate_weather_message(weather_data)
+st.write(weather_message)
+
 # Initiale To-Do-Liste
 if "todos" not in st.session_state:
     st.session_state.todos = [
@@ -58,12 +69,6 @@ if "todos" not in st.session_state:
         {"task": "Etwas aufräumen oder putzen", "completed": False},
         {"task": "Mindestens eine Stunde Handypause", "completed": False}
     ]
-
-# Aktuelles Datum, Wochentag und Uhrzeit
-current_time = datetime.now().strftime("%A, %d. %B %Y, %H:%M:%S")
-
-# Titel der Seite mit Datum und Zeit
-st.title(f"To-Do Liste  |  {current_time}")
 
 # Funktion zum Abhaken von Aufgaben
 def toggle_task(index):
