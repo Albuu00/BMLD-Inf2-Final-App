@@ -67,4 +67,3 @@ plot_line_chart(completed_todos, "Erledigte To-Dos")
 
 st.subheader("Nicht erledigte To-Dos")
 plot_line_chart(not_completed_todos, "Nicht erledigte To-Dos")
-
