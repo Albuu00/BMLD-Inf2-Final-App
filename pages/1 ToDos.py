@@ -12,11 +12,11 @@ if "todos" not in st.session_state:
     st.session_state.todos = [
         {"task": "2 Liter Wasser trinken", "completed": False},
         {"task": "Spazieren", "completed": False},
-        {"task": "10 Minuten Dehnen", "completed": False}
-        {"task": "Mindestens eine Frucht gegessen", "completed": False}
-        {"task": "Mindestens ein Gemüse gegessen", "completed": False}
-        {"task": "7 bis 8 Stunden geschlafen", "completed": False}
-        {"task": "Etwas aufräumen oder putzen", "completed": False}
+        {"task": "10 Minuten Dehnen", "completed": False},
+        {"task": "Mindestens eine Frucht gegessen", "completed": False},
+        {"task": "Mindestens ein Gemüse gegessen", "completed": False},
+        {"task": "7 bis 8 Stunden geschlafen", "completed": False},
+        {"task": "Etwas aufräumen oder putzen", "completed": False},
         {"task": "Mindestens eine Stunde Handypause", "completed": False}
     ]
 
