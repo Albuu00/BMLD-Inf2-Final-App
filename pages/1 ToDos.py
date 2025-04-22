@@ -10,7 +10,7 @@ import requests
 
 # OpenWeatherMap API-Schlüssel und Basis-URL
 API_KEY = "dein_api_schlüssel"  # Ersetze dies durch deinen OpenWeatherMap-API-Schlüssel
-BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q=Zurich&appid=dein_api_schlüssel&units=metric&lang=de"
+BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
 
 # Funktion, um Wetterdaten abzurufen
 def get_weather(city="Zurich"):
@@ -21,12 +21,14 @@ def get_weather(city="Zurich"):
         "lang": "de"
     }
     response = requests.get(BASE_URL, params=params)
-    st.write(response.status_code)  # Zeigt den HTTP-Statuscode an
-    st.write(response.json())  # Zeigt die Antwort der API an (falls verfügbar)
+    st.write(f"HTTP-Statuscode: {response.status_code}")  # Debugging: Zeigt den HTTP-Statuscode an
     if response.status_code == 200:
         return response.json()
+    elif response.status_code == 401:
+        st.error("Ungültiger API-Schlüssel. Bitte überprüfe deinen API-Schlüssel.")
     else:
-        return None
+        st.error(f"Fehler beim Abrufen der Wetterdaten: {response.status_code}")
+    return None
 
 # Funktion, um eine Wetteraussage zu generieren
 def generate_weather_message(weather_data):
