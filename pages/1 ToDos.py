@@ -20,7 +20,11 @@ if "todos" not in st.session_state:
         {"task": "Mindestens eine Stunde Handypause", "completed": False}
     ]
 
-st.title("To-Do Liste")
+# Aktuelles Datum, Wochentag und Uhrzeit
+current_time = datetime.now().strftime("%A, %d. %B %Y, %H:%M:%S")
+
+# Titel der Seite mit Datum und Zeit
+st.title(f"To-Do Liste  |  {current_time}")
 
 # Funktion zum Abhaken von Aufgaben
 def toggle_task(index):
