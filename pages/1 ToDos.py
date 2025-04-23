@@ -81,8 +81,9 @@ def toggle_task(index):
 for i, todo in enumerate(st.session_state.todos):
     col1, col2 = st.columns([0.1, 0.9])
     with col1:
-        # Checkbox zum Abhaken
-        if st.checkbox("", value=todo["completed"], key=f"todo_{i}"):
+              # Checkbox zum Abhaken
+        checked = st.checkbox("", value=todo["completed"], key=f"todo_{i}")
+        if checked != todo["completed"]:
             toggle_task(i)
     with col2:
         # Aufgabe anzeigen (grau, wenn abgehakt)
