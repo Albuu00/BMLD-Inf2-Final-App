@@ -5,6 +5,11 @@ from utils.data_manager import DataManager
 LoginManager().go_to_login('Start.py') 
 # ====== End Login Block ======
 
+# initialize the login manager
+login_manager = LoginManager(data_manager)
+login_manager.login_register()  # open login/register page
+
+
 import streamlit as st
 import requests
 
