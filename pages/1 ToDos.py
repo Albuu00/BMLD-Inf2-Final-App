@@ -105,4 +105,4 @@ for i, todo in enumerate(st.session_state.todos):
         # Button zum Löschen der Aufgabe
         if st.button("🗑️", key=f"delete_{i}"):
             st.session_state.todos.pop(i)
-            st.set_query_params()  # Seite neu laden, um die Änderungen anzuzeigen
+            
