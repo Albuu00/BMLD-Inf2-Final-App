@@ -77,6 +77,16 @@ if "todos" not in st.session_state:
 def toggle_task(index):
     st.session_state.todos[index]["completed"] = not st.session_state.todos[index]["completed"]
 
+# Eingabefeld und Button zum Hinzufügen neuer To-Dos
+st.subheader("Neues To-Do hinzufügen")
+new_todo = st.text_input("Gib ein neues To-Do ein:")
+if st.button("Hinzufügen"):
+    if new_todo.strip():  # Überprüfen, ob das Eingabefeld nicht leer ist
+        st.session_state.todos.append({"task": new_todo.strip(), "completed": False})
+        st.success(f"'{new_todo}' wurde zur To-Do-Liste hinzugefügt!")
+    else:
+        st.error("Das To-Do-Feld darf nicht leer sein.")
+
 # To-Do-Liste anzeigen
 for i, todo in enumerate(st.session_state.todos):
     col1, col2 = st.columns([0.1, 0.9])
