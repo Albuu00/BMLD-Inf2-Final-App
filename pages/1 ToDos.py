@@ -89,7 +89,7 @@ if st.button("Hinzufügen"):
 
 # To-Do-Liste anzeigen
 for i, todo in enumerate(st.session_state.todos):
-    col1, col2 = st.columns([0.1, 0.9])
+    col1, col2, col3 = st.columns([0.1, 0.8, 0.1])
     with col1:
               # Checkbox zum Abhaken
         checked = st.checkbox("", value=todo["completed"], key=f"todo_{i}")
