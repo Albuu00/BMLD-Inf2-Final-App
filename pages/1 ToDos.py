@@ -101,3 +101,8 @@ for i, todo in enumerate(st.session_state.todos):
             st.markdown(f"<span style='color: gray; text-decoration: line-through;'>{todo['task']}</span>", unsafe_allow_html=True)
         else:
             st.markdown(todo["task"])
+    with col3:
+        # Button zum Löschen der Aufgabe
+        if st.button("🗑️", key=f"delete_{i}"):
+            st.session_state.todos.pop(i)
+            st.experimental_rerun()  # Seite neu laden, um die Änderungen anzuzeigen
