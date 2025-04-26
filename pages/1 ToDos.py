@@ -105,7 +105,7 @@ for i, todo in enumerate(st.session_state.todos):
             )
         else:
             # Checkbox anzeigen, wenn die Aufgabe nicht erledigt ist
-            if st.checkbox("", value=todo["completed"], key=f"todo_{i}"):
+            if st.checkbox("", value=False, key=f"todo_{i}"):
                 # Status der Aufgabe direkt aktualisieren
                 st.session_state.todos[i]["completed"] = True
     with col2:
