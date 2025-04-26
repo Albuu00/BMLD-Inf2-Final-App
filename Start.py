@@ -21,7 +21,7 @@ import streamlit as st
 
 # !! WICHTIG: Eure Emails müssen in der App erscheinen!!
 
-st.title("HealthySync")
+st.markdown("<h1 style='color:blue;'>HealthySync</h1>", unsafe_allow_html=True)
 
 # Streamlit über den Text unten direkt in die App - cool!
 """
