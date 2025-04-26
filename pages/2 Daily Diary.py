@@ -5,7 +5,7 @@ LoginManager().go_to_login('Start.py')
 import streamlit as st
 
 # Titel der App
-st.title("Daily Diary")
+st.title("My Daily Diary")
 
 # Textfeld für den Nutzer
 user_input = st.text_area("Schreibe hier deine Gedanken:", placeholder="Dein Text...")

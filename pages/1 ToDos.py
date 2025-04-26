@@ -84,6 +84,10 @@ new_todo = st.text_input("Gib ein neues To-Do ein:")
 if st.button("Hinzufügen"):
     if new_todo.strip():  # Überprüfen, ob das Eingabefeld nicht leer ist
         st.session_state.todos.append({"task": new_todo.strip(), "completed": False})
+        
+        # Neues To-Do in die Datenbank speichern
+        DataManager().append_record(session_state_key='data_df', record_dict=new_todo_entry)
+        
         st.success(f"'{new_todo}' wurde zur To-Do-Liste hinzugefügt!")
     else:
         st.error("Das To-Do-Feld darf nicht leer sein.")
