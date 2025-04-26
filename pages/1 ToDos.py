@@ -96,16 +96,18 @@ for i, todo in enumerate(st.session_state.todos):
         #checked = st.checkbox("", value=todo["completed"], key=f"todo_{i}")
         #if checked != todo["completed"]:
             #toggle_task(i)
-        # Checkbox mit grünem Haken
+        # Checkbox oder grüner Haken anzeigen
         if todo["completed"]:
+            # Grüner Haken anzeigen, wenn die Aufgabe erledigt ist
             st.markdown(
                 f"<span style='color: green; font-size: 20px;'>✔</span>",
                 unsafe_allow_html=True,
             )
         else:
-            checked = st.checkbox("", value=todo["completed"], key=f"todo_{i}")
-            if checked != todo["completed"]:
-                toggle_task(i)
+            # Checkbox anzeigen, wenn die Aufgabe nicht erledigt ist
+            if st.checkbox("", value=todo["completed"], key=f"todo_{i}"):
+                toggle_task(i)  # Aufgabe als erledigt markieren
+                st.experimental_rerun()  # Seite neu laden, um den grünen Haken anzuzeigen
     with col2:
         # Aufgabe anzeigen (grau, wenn abgehakt)
         if todo["completed"]:
