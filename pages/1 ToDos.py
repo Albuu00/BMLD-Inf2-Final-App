@@ -90,6 +90,7 @@ if st.button("Hinzufügen"):
         st.session_state.todos.append(new_todo_entry)
         
         # Neues To-Do in die Datenbank speichern
+        st.write("Speichere neues To-Do in die Datenbank:", new_todo_entry)  # Debugging
         DataManager().append_record(session_state_key='data_df', record_dict=new_todo_entry)
         
         st.success(f"'{new_todo}' wurde zur To-Do-Liste hinzugefügt!")
