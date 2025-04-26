@@ -83,7 +83,11 @@ st.subheader("Neues To-Do hinzufügen")
 new_todo = st.text_input("Gib ein neues To-Do ein:")
 if st.button("Hinzufügen"):
     if new_todo.strip():  # Überprüfen, ob das Eingabefeld nicht leer ist
-        st.session_state.todos.append({"task": new_todo.strip(), "completed": False})
+        # Neues To-Do erstellen
+        new_todo_entry = {"task": new_todo.strip(), "completed": False}
+        
+        # Neues To-Do zur Session-State-Liste hinzufügen
+        st.session_state.todos.append(new_todo_entry)
         
         # Neues To-Do in die Datenbank speichern
         DataManager().append_record(session_state_key='data_df', record_dict=new_todo_entry)
