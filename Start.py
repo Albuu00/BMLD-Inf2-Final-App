@@ -25,7 +25,7 @@ st.markdown("<h1 style='color:turquoise;'>HealthySync</h1>", unsafe_allow_html=T
 
 # Streamlit über den Text unten direkt in die App - cool!
 """
-Diese App wurde von folgenden Personen entwickelt:
+Autoren:
 - Albulena Ibishi (ibishalb@students.zhaw.ch)
 - Simona Flachsmann (flachsim@students.zhaw.ch)
 - Aylin Ago (agoayl01@students.zhaw.ch)
