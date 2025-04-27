@@ -31,7 +31,7 @@ if st.button("Speichern"):
         }
 
         # Daten in eine CSV-Datei speichern
-        file_path = "daily_diary.csv"
+        file_path = "data.csv"
         try:
             # Überprüfen, ob die Datei existiert
             if not pd.io.common.file_exists(file_path):
