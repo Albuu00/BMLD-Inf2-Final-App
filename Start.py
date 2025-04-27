@@ -32,11 +32,18 @@ Autoren:
 
 Diese App ist ein Todo Reminder.
 """ 
-if st.button("Todos"):
-    st.switch_page("pages/1 ToDos.py")
-if st.button("Daily Diary"):
-    st.switch_page("pages/2 Daily Diary.py")
-if st.button("Daten"):
-    st.switch_page("pages/3 Daten.py")
-if st.button("Grafik"):
-    st.switch_page("pages/4 Grafik.py")
+# Buttons nebeneinander anzeigen
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    if st.button("Todos"):
+        st.switch_page("pages/1 ToDos.py")
+with col2:
+    if st.button("Daily Diary"):
+        st.switch_page("pages/2 Daily Diary.py")
+with col3:
+    if st.button("Daten"):
+        st.switch_page("pages/3 Daten.py")
+with col4:
+    if st.button("Grafik"):
+        st.switch_page("pages/4 Grafik.py")
