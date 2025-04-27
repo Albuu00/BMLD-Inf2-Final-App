@@ -49,3 +49,19 @@ if st.button("Speichern"):
             st.error(f"Fehler beim Speichern: {e}")
     else:
         st.error("Das Textfeld darf nicht leer sein.")
+
+# Gespeicherte Einträge anzeigen
+st.subheader("Deine bisherigen Einträge")
+try:
+    # CSV-Datei laden
+    file_path = "data.csv"
+    if pd.io.common.file_exists(file_path):
+        diary_data = pd.read_csv(file_path)
+        for index, row in diary_data.iterrows():
+            st.markdown(f"**Datum:** {row['date']} **Zeit:** {row['time']}")
+            st.markdown(f"> {row['entry']}")
+            st.markdown("---")  # Trennlinie zwischen Einträgen
+    else:
+        st.info("Es gibt noch keine gespeicherten Einträge.")
+except Exception as e:
+    st.error(f"Fehler beim Laden der Einträge: {e}")
