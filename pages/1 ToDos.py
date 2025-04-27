@@ -1,3 +1,4 @@
+import pandas as pd
 from datetime import datetime
 # ====== Start Login Block ======
 from utils.login_manager import LoginManager
