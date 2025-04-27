@@ -1,6 +1,6 @@
 # BMLD-Inf2-Final-App - 🌱 HealthySync App
 
-👉 [Hier geht's direkt zur App!](https://healthysync.streamlit.app) 🚀
+👉 [Hier geht's direkt zur App!](https://bmld-inf2-final-app-uv6mac6tfn8bptdzptdmcv.streamlit.app) 🚀
 
 ---
 
