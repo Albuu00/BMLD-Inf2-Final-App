@@ -9,7 +9,7 @@ Der Fokus liegt auf Übersichtlichkeit, Reflexion und kleinen Erfolgen.
 
 ---
 
-## 🛠️ MVP – Minimal Viable Product (erste Version)
+## 🛠️ MVP – Minimal Viable Product - Erste Version (V1)
 
 - 🏠 **Startseite mit Tages-ToDos** (inkl. 📅 Datum & 📆 Wochentag)
 - ➕ **ToDos hinzufügen, bearbeiten & als erledigt ✅ markieren**
