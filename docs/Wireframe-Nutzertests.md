@@ -5,13 +5,12 @@
 Wir möchten wissen, wie klar die jeweiligen Unterseiten unserer App für den Nutzer sind und was für eine einfachere Nutzung fehlt, z.B. Buttons, Beschreibungen, Titel etc.  
 Außerdem wollen wir testen, ob der Nutzer bereits vorhandene Features als sinnvoll erachtet oder nicht.
 
-## Aufgabenstellung
+## Fragestellungen
 
-Der Nutzer sollte sich eigenständig durch die App navigieren:  
-- Die ToDo-Liste ansehen  
-- Aufgaben abhaken  
-- Die Statistikanzeige prüfen  
-- Zwischen den Unterseiten wechseln
+- Findet der Nutzer die ToDo-Liste und kann Aufgaben abhaken?
+- Versteht der Nutzer die Erfolgsanzeige in der Statistikseite?
+- Kann der Nutzer selbstständig zwischen den Seiten wechseln?
+- Werden vorhandene Features als hilfreich empfunden oder nicht?
 
 ## Testperson
 - Alter: 24 Jahre
