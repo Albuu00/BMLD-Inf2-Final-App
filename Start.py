@@ -17,6 +17,10 @@ data_manager.load_app_data(
     parse_dates = ['timestamp']
     )
 
+# Erstelle eine leere Datei mit den richtigen Spalten
+columns = ["task", "completed", "timestamp"]
+df = pd.DataFrame(columns=columns)
+df.to_csv("data.csv", index=False)
 import streamlit as st
 
 # !! WICHTIG: Eure Emails müssen in der App erscheinen!!
