@@ -14,18 +14,18 @@ Der Fokus liegt auf Übersichtlichkeit, Reflexion und kleinen Erfolgen.
 - 🏠 **Startseite mit Tages-ToDos** (inkl. 📅 Datum & 📆 Wochentag)
 - ➕ **ToDos hinzufügen, bearbeiten & als erledigt ✅ markieren**
 - 📊 **Einfache Erfolgsanzeige** (z.B. Tagesbalken/Graph)
-- 🎉 **Positive Verstärkung beim Erledigen** (z.B. kleine Animation/Meldung)
-- 🧭 **Navigation** zwischen ToDo, Statistik & Profilansicht
+- 🔗 **Verbindung zu SwitchDrive und Speicherung der Nutzerdaten**  
+  (gesicherte Ablage der ToDos und Tagesdaten auf SwitchDrive)
 
 ---
 
-## 🚀 Nächste Iteration (nach MVP)
+## 🚀 Nächste Iteration (nach MVP) – Zweite Version (V2)
 
 - 📓 **Mini-Tagebuchfunktion** mit Textfeld oder 😄 Emojis
 - 👤 **Benutzername** auf allen Unterseiten anzeigen
 - 🔄 **Bessere Navigation** (z.B. ⬅️➡️ Pfeile zwischen Seiten)
 - 🔁 **Wiederkehrende Routinen planen** (z.B. „jeden Montag Mealprep“)
-- 📈 **Statistikseite mit Wochen-/Monatsverlauf & Streaks**
+- 📊 **Erweiterte Statistikseite** mit Wochen-/Monatsverlauf & Streaks
 
 ---
 
