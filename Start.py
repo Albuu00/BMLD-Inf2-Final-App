@@ -9,6 +9,12 @@ data_manager = DataManager(fs_protocol='webdav', fs_root_folder="HealthySync")
 login_manager = LoginManager(data_manager)
 login_manager.login_register()  # open login/register page
 
+# Erstelle eine leere Datei mit den richtigen Spalten
+columns = ["task", "completed", "timestamp"]
+df = pd.DataFrame(columns=columns)
+df.to_csv("data.csv", index=False)
+import streamlit as st
+
 # Laden der Daten
 data_manager.load_app_data(
     session_state_key='data_df', 
@@ -16,13 +22,11 @@ data_manager.load_app_data(
     initial_value = pd.DataFrame(), 
     parse_dates = ['timestamp']
     )
-
-# Erstelle eine leere Datei mit den richtigen Spalten
-columns = ["task", "completed", "timestamp"]
-df = pd.DataFrame(columns=columns)
-df.to_csv("data.csv", index=False)
-import streamlit as st
-
+except ValueError as e:
+    st.error(f"Fehler beim Laden der Daten: {e}")
+    # Erstelle eine leere Datei, falls sie fehlt
+    df = pd.DataFrame(columns=["task", "completed", "timestamp"])
+    df.to_csv("data.csv", index=False)
 # !! WICHTIG: Eure Emails müssen in der App erscheinen!!
 
 st.markdown("<h1 style='color:turquoise;'>HealthySync</h1>", unsafe_allow_html=True)
