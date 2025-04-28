@@ -20,7 +20,7 @@ try:
     data_manager.load_app_data(
         session_state_key='data_df', 
         file_name='data.csv', 
-        initial_value=pd.DataFrame(columns=["task", "completed", "timestamp"]),  # Passe hier "timestamp" an, falls du "current_time" verwendest
+        initial_value=pd.DataFrame(columns=["task", "completed", "current_time"]),  # Passe hier "timestamp" an, falls du "current_time" verwendest
         parse_dates=['current_time']  # Falls du "current_time" verwendest, ändere dies zu ['current_time']
     )
 except ValueError as e:
