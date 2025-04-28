@@ -14,9 +14,9 @@ data_manager.load_app_data(
     ) 
 
 # Erstelle eine leere Datei mit den richtigen Spalten
-columns = ["task", "completed", "timestamp"]
-df = pd.DataFrame(columns=columns)
-df.to_csv("data.csv", index=False)
+#columns = ["task", "completed", "timestamp"]
+#df = pd.DataFrame(columns=columns)
+#df.to_csv("data.csv", index=False)
 
 # initialize the login manager
 login_manager = LoginManager(data_manager)
