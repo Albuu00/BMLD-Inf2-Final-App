@@ -8,7 +8,7 @@ import streamlit as st
 file_path = "data.csv"
 if not os.path.exists(file_path):
     # Erstelle eine leere Datei mit den richtigen Spalten
-    columns = ["task", "completed", "current_time"]  # Falls du "current_time" verwenden möchtest, ersetze "timestamp" durch "current_time"
+    columns = ["task", "completed", "timestamp"]  # Falls du "current_time" verwenden möchtest, ersetze "timestamp" durch "current_time"
     df = pd.DataFrame(columns=columns)
     df.to_csv(file_path, index=False)
 
@@ -20,13 +20,13 @@ try:
     data_manager.load_app_data(
         session_state_key='data_df', 
         file_name='data.csv', 
-        initial_value=pd.DataFrame(columns=["task", "completed", "current_time"]),  # Passe hier "timestamp" an, falls du "current_time" verwendest
-        parse_dates=['current_time']  # Falls du "current_time" verwendest, ändere dies zu ['current_time']
+        initial_value=pd.DataFrame(columns=["task", "completed", "timestamp"]),  # Passe hier "timestamp" an, falls du "current_time" verwendest
+        parse_dates=['timestamp']  # Falls du "current_time" verwendest, ändere dies zu ['current_time']
     )
 except ValueError as e:
     st.error(f"Fehler beim Laden der Daten: {e}")
     # Erstelle eine leere Datei, falls sie fehlt oder fehlerhaft ist
-    columns = ["task", "completed", "current_time"]  # Passe hier "timestamp" an, falls du "current_time" verwendest
+    columns = ["task", "completed", "timestamp"]  # Passe hier "timestamp" an, falls du "current_time" verwendest
     df = pd.DataFrame(columns=columns)
     df.to_csv("data.csv", index=False)
     st.warning("Eine neue Datei wurde erstellt, da die alte Datei fehlerhaft war.")
