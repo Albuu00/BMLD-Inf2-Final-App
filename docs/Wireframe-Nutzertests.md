@@ -3,7 +3,7 @@
 ## Hypothese
 
 Wir möchten wissen, wie klar die jeweiligen Unterseiten unserer App für den Nutzer sind und was für eine einfachere Nutzung fehlt, z.B. Buttons, Beschreibungen, Titel etc.  
-Außerdem wollen wir testen, ob der Nutzer bereits vorhandene Features als sinnvoll erachtet oder nicht.
+Ausserdem wollen wir testen, ob der Nutzer bereits vorhandene Features als sinnvoll erachtet oder nicht.
 
 ## Fragestellungen
 
