@@ -1,3 +1,4 @@
+import pandas as pd
 from datetime import datetime
 # ====== Start Login Block ======
 from utils.login_manager import LoginManager
@@ -11,6 +12,7 @@ import requests
 # OpenWeatherMap API-Schlüssel und Basis-URL
 API_KEY = "b08ff895beacec99a194e0aa80c2aac4"  # Ersetze dies durch deinen OpenWeatherMap-API-Schlüssel
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
+
 # Funktion, um Wetterdaten abzurufen
 def get_weather(city="Zurich"):
     params = {
@@ -76,13 +78,26 @@ if "todos" not in st.session_state:
 # Funktion zum Abhaken von Aufgaben
 def toggle_task(index):
     st.session_state.todos[index]["completed"] = not st.session_state.todos[index]["completed"]
+    
+    # Aktuelles Todo als record_dict speichern
+    current_todo = st.session_state.todos[index]
+    current_todo["timestamp"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Zeitstempel hinzufügen
+    DataManager().append_record(session_state_key='data_df', record_dict=current_todo)
 
 # Eingabefeld und Button zum Hinzufügen neuer To-Dos
 st.subheader("Neues To-Do hinzufügen")
 new_todo = st.text_input("Gib ein neues To-Do ein:")
 if st.button("Hinzufügen"):
     if new_todo.strip():  # Überprüfen, ob das Eingabefeld nicht leer ist
-        st.session_state.todos.append({"task": new_todo.strip(), "completed": False})
+        # Neues To-Do erstellen
+        new_todo_entry = {"task": new_todo.strip(), "completed": False, "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+        
+        # Neues To-Do zur Session-State-Liste hinzufügen
+        st.session_state.todos.append(new_todo_entry)
+        
+        # Neues To-Do in die Datenbank speichern
+        DataManager().append_record(session_state_key='data_df', record_dict=new_todo_entry)
+        
         st.success(f"'{new_todo}' wurde zur To-Do-Liste hinzugefügt!")
     else:
         st.error("Das To-Do-Feld darf nicht leer sein.")
@@ -91,10 +106,11 @@ if st.button("Hinzufügen"):
 for i, todo in enumerate(st.session_state.todos):
     col1, col2, col3 = st.columns([0.1, 0.8, 0.1])
     with col1:
-              # Checkbox zum Abhaken
+        # Checkbox zum Abhaken
         checked = st.checkbox("", value=todo["completed"], key=f"todo_{i}")
         if checked != todo["completed"]:
             toggle_task(i)
+
     with col2:
         # Aufgabe anzeigen (grau, wenn abgehakt)
         if todo["completed"]:
@@ -105,5 +121,5 @@ for i, todo in enumerate(st.session_state.todos):
         # Button zum Löschen der Aufgabe
         if st.button("🗑️", key=f"delete_{i}"):
             st.session_state.todos.pop(i)
-            st.rerun()
+            st.experimental_rerun()
             
