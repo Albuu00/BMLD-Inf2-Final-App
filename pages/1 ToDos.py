@@ -75,10 +75,16 @@ if "todos" not in st.session_state:
     ]
 
 # Funktion zum Abhaken von Aufgaben
+#def toggle_task(index):
+    #st.session_state.todos[index]["completed"] = not st.session_state.todos[index]["completed"]
+    #DataManager().append_record(session_state_key='data_df', record_dict=new_todo_entry)
+
 def toggle_task(index):
     st.session_state.todos[index]["completed"] = not st.session_state.todos[index]["completed"]
-
-    DataManager().append_record(session_state_key='data_df', record_dict=new_todo_entry)
+    
+    # Aktuelles Todo als record_dict speichern
+    current_todo = st.session_state.todos[index]
+    DataManager().append_record(session_state_key='data_df', record_dict=current_todo)
 
 # Eingabefeld und Button zum Hinzufügen neuer To-Dos
 st.subheader("Neues To-Do hinzufügen")
@@ -97,6 +103,18 @@ if st.button("Hinzufügen"):
         st.success(f"'{new_todo}' wurde zur To-Do-Liste hinzugefügt!")
     else:
         st.error("Das To-Do-Feld darf nicht leer sein.")
+
+
+
+#def toggle_task(index):
+    #st.session_state.todos[index]["completed"] = not st.session_state.todos[index]["completed"]
+
+    # Das aktuelle ToDo speichern
+    #DataManager().append_record(
+        #session_state_key='data_df', 
+        #record_dict=st.session_state.todos[index]
+    #)
+
 
 # To-Do-Liste anzeigen
 for i, todo in enumerate(st.session_state.todos):
