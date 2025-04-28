@@ -5,16 +5,24 @@ from utils.login_manager import LoginManager
 # Initialisierung des Data Managers (hier mit Verbindung zu SwitchDrive)
 data_manager = DataManager(fs_protocol='webdav', fs_root_folder="HealthySync") 
 
-# initialize the login manager
-login_manager = LoginManager(data_manager)
-login_manager.login_register()  # open login/register page
+# Laden der Daten
+data_manager.load_app_data(
+    session_state_key='data_df', 
+    file_name='data.csv', 
+    initial_value = pd.DataFrame(), 
+    parse_dates = ['timestamp']
+    ) 
 
 # Erstelle eine leere Datei mit den richtigen Spalten
 columns = ["task", "completed", "timestamp"]
 df = pd.DataFrame(columns=columns)
 df.to_csv("data.csv", index=False)
-import streamlit as st
 
+# initialize the login manager
+login_manager = LoginManager(data_manager)
+login_manager.login_register()  # open login/register page
+
+import streamlit as st
 
 # !! WICHTIG: Eure Emails müssen in der App erscheinen!!
 
