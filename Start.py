@@ -15,18 +15,7 @@ df = pd.DataFrame(columns=columns)
 df.to_csv("data.csv", index=False)
 import streamlit as st
 
-# Laden der Daten
-data_manager.load_app_data(
-    session_state_key='data_df', 
-    file_name='data.csv', 
-    initial_value = pd.DataFrame(), 
-    parse_dates = ['timestamp']
-    )
-except ValueError as e:
-    st.error(f"Fehler beim Laden der Daten: {e}")
-    # Erstelle eine leere Datei, falls sie fehlt
-    df = pd.DataFrame(columns=["task", "completed", "timestamp"])
-    df.to_csv("data.csv", index=False)
+
 # !! WICHTIG: Eure Emails müssen in der App erscheinen!!
 
 st.markdown("<h1 style='color:turquoise;'>HealthySync</h1>", unsafe_allow_html=True)
