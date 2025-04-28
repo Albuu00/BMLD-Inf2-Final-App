@@ -3,7 +3,7 @@ from utils.data_manager import DataManager
 from utils.login_manager import LoginManager
 
 # Initialisierung des Data Managers (hier mit Verbindung zu SwitchDrive)
-data_manager = DataManager(fs_protocol='webdav', fs_root_folder="BMLD_App_DB") 
+data_manager = DataManager(fs_protocol='webdav', fs_root_folder="HealthySync") 
 
 # initialize the login manager
 login_manager = LoginManager(data_manager)
