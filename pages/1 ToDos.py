@@ -12,6 +12,7 @@ import requests
 # OpenWeatherMap API-Schlüssel und Basis-URL
 API_KEY = "b08ff895beacec99a194e0aa80c2aac4"  # Ersetze dies durch deinen OpenWeatherMap-API-Schlüssel
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
+
 # Funktion, um Wetterdaten abzurufen
 def get_weather(city="Zurich"):
     params = {
@@ -75,15 +76,12 @@ if "todos" not in st.session_state:
     ]
 
 # Funktion zum Abhaken von Aufgaben
-#def toggle_task(index):
-    #st.session_state.todos[index]["completed"] = not st.session_state.todos[index]["completed"]
-    #DataManager().append_record(session_state_key='data_df', record_dict=new_todo_entry)
-
 def toggle_task(index):
     st.session_state.todos[index]["completed"] = not st.session_state.todos[index]["completed"]
     
     # Aktuelles Todo als record_dict speichern
     current_todo = st.session_state.todos[index]
+    current_todo["timestamp"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Zeitstempel hinzufügen
     DataManager().append_record(session_state_key='data_df', record_dict=current_todo)
 
 # Eingabefeld und Button zum Hinzufügen neuer To-Dos
@@ -92,7 +90,7 @@ new_todo = st.text_input("Gib ein neues To-Do ein:")
 if st.button("Hinzufügen"):
     if new_todo.strip():  # Überprüfen, ob das Eingabefeld nicht leer ist
         # Neues To-Do erstellen
-        new_todo_entry = {"task": new_todo.strip(), "completed": False}
+        new_todo_entry = {"task": new_todo.strip(), "completed": False, "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
         
         # Neues To-Do zur Session-State-Liste hinzufügen
         st.session_state.todos.append(new_todo_entry)
@@ -103,18 +101,6 @@ if st.button("Hinzufügen"):
         st.success(f"'{new_todo}' wurde zur To-Do-Liste hinzugefügt!")
     else:
         st.error("Das To-Do-Feld darf nicht leer sein.")
-
-
-
-#def toggle_task(index):
-    #st.session_state.todos[index]["completed"] = not st.session_state.todos[index]["completed"]
-
-    # Das aktuelle ToDo speichern
-    #DataManager().append_record(
-        #session_state_key='data_df', 
-        #record_dict=st.session_state.todos[index]
-    #)
-
 
 # To-Do-Liste anzeigen
 for i, todo in enumerate(st.session_state.todos):
@@ -135,5 +121,5 @@ for i, todo in enumerate(st.session_state.todos):
         # Button zum Löschen der Aufgabe
         if st.button("🗑️", key=f"delete_{i}"):
             st.session_state.todos.pop(i)
-            st.rerun()
+            st.experimental_rerun()
             

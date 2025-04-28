@@ -31,7 +31,7 @@ if st.button("Speichern"):
             #"date": datetime.now().strftime("%Y-%m-%d"),
             #"time": datetime.now().strftime("%H:%M:%S"),
             #"entry": user_input.strip()
-        }
+        #}
 
         # Speichern in einer Textdatei (optional, falls benötigt)
         #with open("daily_diary.txt", "a", encoding="utf-8") as file:
