@@ -1,28 +1,39 @@
 import pandas as pd
+import os
 from utils.data_manager import DataManager
 from utils.login_manager import LoginManager
+import streamlit as st
+
+# Überprüfen, ob die Datei existiert und die richtigen Spalten enthält
+file_path = "data.csv"
+if not os.path.exists(file_path):
+    # Erstelle eine leere Datei mit den richtigen Spalten
+    columns = ["task", "completed", "current_time"]  # Falls du "current_time" verwenden möchtest, ersetze "timestamp" durch "current_time"
+    df = pd.DataFrame(columns=columns)
+    df.to_csv(file_path, index=False)
 
 # Initialisierung des Data Managers (hier mit Verbindung zu SwitchDrive)
 data_manager = DataManager(fs_protocol='webdav', fs_root_folder="HealthySync") 
 
 # Laden der Daten
-data_manager.load_app_data(
-    session_state_key='data_df', 
-    file_name='data.csv', 
-    initial_value = pd.DataFrame(), 
-    parse_dates = ['timestamp']
-    ) 
-
-# Erstelle eine leere Datei mit den richtigen Spalten
-#columns = ["task", "completed", "timestamp"]
-#df = pd.DataFrame(columns=columns)
-#df.to_csv("data.csv", index=False)
+try:
+    data_manager.load_app_data(
+        session_state_key='data_df', 
+        file_name='data.csv', 
+        initial_value=pd.DataFrame(columns=["task", "completed", "timestamp"]),  # Passe hier "timestamp" an, falls du "current_time" verwendest
+        parse_dates=['current_time']  # Falls du "current_time" verwendest, ändere dies zu ['current_time']
+    )
+except ValueError as e:
+    st.error(f"Fehler beim Laden der Daten: {e}")
+    # Erstelle eine leere Datei, falls sie fehlt oder fehlerhaft ist
+    columns = ["task", "completed", "current_time"]  # Passe hier "timestamp" an, falls du "current_time" verwendest
+    df = pd.DataFrame(columns=columns)
+    df.to_csv("data.csv", index=False)
+    st.warning("Eine neue Datei wurde erstellt, da die alte Datei fehlerhaft war.")
 
 # initialize the login manager
 login_manager = LoginManager(data_manager)
 login_manager.login_register()  # open login/register page
-
-import streamlit as st
 
 # !! WICHTIG: Eure Emails müssen in der App erscheinen!!
 
