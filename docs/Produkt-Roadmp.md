@@ -29,21 +29,11 @@ Der Fokus liegt auf Übersichtlichkeit, Reflexion und kleinen Erfolgen.
 
 ---
 
-## 🌟 Nice-to-have (später)
-
-- 🎯 **Zielverfolgung** (z.B. „3x pro Woche Sport“) mit Fortschrittsanzeige
-- 📹 **YouTube-Integration** für motivierende Inhalte (z.B. Fitness, Rezepte)
-- 🧑‍🎨 **Personalisierung** durch Avatar & Nutzerprofil
-- 🌙 **Dark Mode** für Abendroutine
-- 📤 **Social Sharing** von Erfolgen oder Routinen
-
----
-
 ## 📅 Zeitplanung (optional)
 
 | Zeitraum  | 🧩 Ziel/Funktion                                         |
 |-----------|----------------------------------------------------------|
-| Woche 1   | 🏁 Startseite, ToDo-Liste, Erinnerungsfunktion           |
+| Woche 1   | 🏁 Startseite, ToDo-Liste, Erfolgsanzeige, switchDrive   |
 | Woche 2   | 📊 Erfolgsgrafik, Navigation                             |
 | Woche 3   | 📓 Tagebuchfunktion, 👤 Benutzernamenanzeige             |
 | Woche 4   | 🛠️ Feinschliff MVP, 🧪 erster Nutzertest                 |

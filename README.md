@@ -33,9 +33,8 @@ Ideal für alle, die ihr Wohlbefinden nachhaltig verbessern wollen, ohne kompliz
 ## 📈 Features
 
 - ✅ Tägliches Tracking von Wasser, Bewegung und Schlaf
+- 💬 Persönliches Tagebuch zum Tracken von Gefühlen und Empfinden
 - 📊 Übersichtliche Diagramme zu deinen Fortschritten
-- 🔔 Erinnerungsfunktionen für Gesundheitsziele
-- 💬 Personalisierte Motivationstipps
 - 🎯 Benutzerfreundliche und intuitive Oberfläche
 
 ---
