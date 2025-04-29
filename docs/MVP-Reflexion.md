@@ -5,13 +5,13 @@
 Teilweise.  
 Zwei zentrale Funktionen unseres MVP konnten vollständig und erfolgreich umgesetzt werden:
 
-- Die Startseite mit den Tages-ToDos inklusive Datum und Wochentag wurde wie geplant realisiert.
-- Das Hinzufügen, Bearbeiten und Abhaken von ToDos funktioniert zuverlässig.
+- Die Startseite mit den Tages-ToDos inklusive Datum und Wochentag wurde wie geplant realisiert
+- Das Hinzufügen, Bearbeiten und Abhaken von ToDos funktioniert zuverlässig
 
 Bei den anderen beiden Funktionen sind wir derzeit noch in der Umsetzung:
 
-- Die Erfolgsgrafik ist noch nicht vollständig umgesetzt. Stattdessen planen wir derzeit eine Lösung mit vier auswählbaren Smileys, über die Nutzer:innen am Abend ihre Stimmung festhalten können. Daraus wird am Ende der Woche ein einfacher Graph generiert.
-- Auch die Anbindung an SwitchDrive zur Datenspeicherung ist noch nicht implementiert, wird aber aktuell entwickelt.
+- Die Erfolgsgrafik ist noch nicht vollständig umgesetzt. Stattdessen planen wir derzeit eine Lösung mit vier auswählbaren Smileys, über die Nutzer:innen am Abend ihre Stimmung festhalten können. Daraus wird am Ende der Woche ein einfacher Graph generiert
+- Auch die Anbindung an SwitchDrive zur Datenspeicherung ist noch nicht implementiert, wird aber aktuell entwickelt
 
 ---
 
@@ -19,8 +19,8 @@ Bei den anderen beiden Funktionen sind wir derzeit noch in der Umsetzung:
 
 Die folgenden zwei Punkte konnten noch nicht vollständig umgesetzt werden:
 
-- **Erfolgsgrafik:** Die technische Umsetzung der grafischen Wochenübersicht in Verbindung mit der Smiley-Auswahl benötigt noch Zeit und Konzeption.
-- **Speicherung auf SwitchDrive:** Die Integration zur externen Speicherung auf SwitchDrive erfordert zusätzlichen Entwicklungsaufwand, den wir aus zeitlichen Gründen bisher nicht abschliessen konnten.
+- **Erfolgsgrafik:** Die technische Umsetzung der grafischen Wochenübersicht in Verbindung mit der Smiley-Auswahl benötigt noch Zeit und Konzeption
+- **Speicherung auf SwitchDrive:** Die Integration zur externen Speicherung auf SwitchDrive erfordert zusätzlichen Entwicklungsaufwand, den wir aus zeitlichen Gründen bisher nicht abschliessen konnten
 
 ---
 
@@ -40,6 +40,6 @@ Zusätzlich werden kleinere Anpassungen eingeplant, die sich aus dem Nutzertest 
 
 ## 4. Welche Unterstützung brauchen wir, um unsere Ziele zu erreichen?
 
-- **Technische Unterstützung** bei der Einbindung von SwitchDrive (API-Zugriff und Datenstruktur).
-- **Design-Feedback** für die Darstellung des Wochen-Graphs und der Smiley-Auswahl.
-- **Zeitliche Ressourcen** um die offenen Funktionen des MVP (V1) – wie z. B. die Erfolgsgrafik und Datenspeicherung verlässlich fertigzustellen.
+- **Technische Unterstützung** bei der Einbindung von SwitchDrive (API-Zugriff und Datenstruktur)
+- **Design-Feedback** für die Darstellung des Wochen-Graphs und der Smiley-Auswahl
+- **Zeitliche Ressourcen** um die offenen Funktionen des MVP (V1) – wie z. B. die Erfolgsgrafik und Datenspeicherung verlässlich fertigzustellen
