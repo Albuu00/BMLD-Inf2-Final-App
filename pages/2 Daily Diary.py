@@ -14,6 +14,12 @@ import requests
 # Textfeld für den Nutzer
 user_input = st.text_area("Schreibe hier deine Gedanken:", placeholder="Dein Text...")
 
+# Auswahl für Zufriedenheit mit Smileys
+satisfaction = st.radio(
+    "Wie zufrieden bist du heute mit deinen erledigten To-Dos?",
+    options=["😃 Sehr zufrieden", "🙂 Zufrieden", "😐 Neutral", "☹️ Unzufrieden", "😢 Sehr unzufrieden"]
+)
+
 # Button zum Speichern
 #if st.button("Speichern"):
     #with open("daily_diary.txt", "a", encoding="utf-8") as file:
