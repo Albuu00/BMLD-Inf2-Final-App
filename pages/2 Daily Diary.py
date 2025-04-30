@@ -15,34 +15,34 @@ import requests
 user_input = st.text_area("Schreibe hier deine Gedanken:", placeholder="Dein Text...")
 
 # Button zum Speichern
-if st.button("Speichern"):
-    with open("daily_diary.txt", "a", encoding="utf-8") as file:
-        file.write(user_input + "\n")
-    st.success("Dein Text wurde gespeichert!")
+#if st.button("Speichern"):
+    #with open("daily_diary.txt", "a", encoding="utf-8") as file:
+        #file.write(user_input + "\n")
+    #st.success("Dein Text wurde gespeichert!")
 
     # Speichern des neuen Eintrags
-    DataManager().append_record(session_state_key='data_df', record_dict=user_input)
+    #DataManager().append_record(session_state_key='data_df', record_dict=user_input)
 
 # Button zum Speichern
-#if st.button("Speichern"):
-    #if user_input.strip():  # Überprüfen, ob das Eingabefeld nicht leer ist
+if st.button("Speichern"):
+    if user_input.strip():  # Überprüfen, ob das Eingabefeld nicht leer ist
         # Daten vorbereiten
-        #result = {
-            #"date": datetime.now().strftime("%Y-%m-%d"),
-            #"time": datetime.now().strftime("%H:%M:%S"),
-            #"entry": user_input.strip()
-        #}
+        result = {
+            "date": datetime.now().strftime("%Y-%m-%d"),
+            "time": datetime.now().strftime("%H:%M:%S"),
+            "entry": user_input.strip()
+        }
 
         # Speichern in einer Textdatei (optional, falls benötigt)
-        #with open("daily_diary.txt", "a", encoding="utf-8") as file:
-            #file.write(f"{result['date']} {result['time']} - {result['entry']}\n")
+        with open("daily_diary.txt", "a", encoding="utf-8") as file:
+            file.write(f"{result['date']} {result['time']} - {result['entry']}\n")
 
         # Speichern des neuen Eintrags in die Datenbank
-        #DataManager().append_record(session_state_key='data_df', record_dict=result)
+        DataManager().append_record(session_state_key='data_df', record_dict=result)
 
-        #st.success("Dein Text wurde gespeichert!")
-    #else:
-        #st.error("Das Textfeld darf nicht leer sein.")  
+        st.success("Dein Text wurde gespeichert!")
+    else:
+        st.error("Das Textfeld darf nicht leer sein.")  
 
 # Gespeicherte Einträge anzeigen
 st.subheader("Deine bisherigen Einträge")
