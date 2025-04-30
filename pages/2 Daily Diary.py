@@ -41,8 +41,7 @@ if st.button("Speichern"):
 
         # Speichern in einer Textdatei (optional, falls benötigt)
         with open("daily_diary.txt", "a", encoding="utf-8") as file:
-            file.write(f"{result['date']} {result['time']} - {result['entry']}\n")
-
+            file.write(f"{result['date']} {result['time']} - {result['entry']} ({result['satisfaction']})\n")
         # Speichern des neuen Eintrags in die Datenbank
         DataManager().append_record(session_state_key='data_df', record_dict=result)
 
