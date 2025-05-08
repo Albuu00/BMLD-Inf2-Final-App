@@ -7,11 +7,21 @@ LoginManager().go_to_login('Start.py')
 # ====== End Login Block ======
 import streamlit as st
 
-diary_data.to_csv(file_path, index=False, encoding="utf-8")
+# Datei-Pfad für die CSV-Datei
+file_path = "data.csv"
+
+# Überprüfen, ob die Datei existiert, und initialisieren
+try:
+    if pd.io.common.file_exists(file_path):
+        diary_data = pd.read_csv(file_path, encoding="utf-8")  # CSV-Datei laden
+    else:
+        # Falls die Datei nicht existiert, initialisiere ein leeres DataFrame
+        diary_data = pd.DataFrame(columns=["date", "time", "entry", "satisfaction"])
+except Exception as e:
+    st.error(f"Fehler beim Laden der Datei: {e}")
 
 # Titel der App
 st.title("My Daily Diary")
-import requests
 
 # Textfeld für den Nutzer
 user_input = st.text_area("Schreibe hier deine Gedanken:", placeholder="Dein Text...")
@@ -23,15 +33,6 @@ satisfaction = st.radio(
 )
 
 # Button zum Speichern
-#if st.button("Speichern"):
-    #with open("daily_diary.txt", "a", encoding="utf-8") as file:
-        #file.write(user_input + "\n")
-    #st.success("Dein Text wurde gespeichert!")
-
-    # Speichern des neuen Eintrags
-    #DataManager().append_record(session_state_key='data_df', record_dict=user_input)
-
-# Button zum Speichern
 if st.button("Speichern"):
     if user_input.strip():  # Überprüfen, ob das Eingabefeld nicht leer ist
         # Daten vorbereiten
@@ -39,14 +40,16 @@ if st.button("Speichern"):
             "date": datetime.now().strftime("%Y-%m-%d"),
             "time": datetime.now().strftime("%H:%M:%S"),
             "entry": user_input.strip(),
-             "satisfaction": satisfaction  # Zufriedenheit hinzufügen
+            "satisfaction": satisfaction  # Zufriedenheit hinzufügen
         }
 
         # Speichern in einer Textdatei (optional, falls benötigt)
         with open("daily_diary.txt", "a", encoding="utf-8") as file:
             file.write(f"{result['date']} {result['time']} - {result['entry']} ({result['satisfaction']})\n")
-        # Speichern des neuen Eintrags in die Datenbank
-        DataManager().append_record(session_state_key='data_df', record_dict=result)
+
+        # Speichern in die CSV-Datei
+        diary_data = diary_data.append(result, ignore_index=True)  # Neuen Eintrag hinzufügen
+        diary_data.to_csv(file_path, index=False, encoding="utf-8")  # CSV-Datei speichern
 
         st.success("Dein Text wurde gespeichert!")
     else:
@@ -55,10 +58,7 @@ if st.button("Speichern"):
 # Gespeicherte Einträge anzeigen
 st.subheader("Deine bisherigen Einträge")
 try:
-    # CSV-Datei laden
-    file_path = "data.csv"
-    if pd.io.common.file_exists(file_path):
-        diary_data = pd.read_csv(file_path)
+    if not diary_data.empty:
         for index, row in diary_data.iterrows():
             st.markdown(f"**Datum:** {row['date']} **Zeit:** {row['time']}")
             st.markdown(f"> {row['entry']}")
@@ -66,4 +66,4 @@ try:
     else:
         st.info("Es gibt noch keine gespeicherten Einträge.")
 except Exception as e:
-    st.error(f"Fehler beim Laden der Einträge: {e}")
+    st.error(f"Fehler beim Anzeigen der Einträge: {e}")
