@@ -3,6 +3,8 @@ from utils.login_manager import LoginManager
 LoginManager().go_to_login('Start.py')  
 # ====== End Login Block ======
 import streamlit as st
+import pandas as pd
+from datetime import datetime
 
 # Überprüfen, ob die To-Do-Liste existiert
 if "todos" not in st.session_state:
@@ -10,22 +12,44 @@ if "todos" not in st.session_state:
 
 st.title("Übersicht der To-Dos")
 
-# Erfüllte und nicht erfüllte To-Dos filtern
-erfüllte_todos = [todo["task"] for todo in st.session_state.todos if todo["completed"]]
-nicht_erfüllte_todos = [todo["task"] for todo in st.session_state.todos if not todo["completed"]]
+# To-Do-Daten in ein DataFrame umwandeln
+if st.session_state.todos:
+    df = pd.DataFrame(st.session_state.todos)
+    df["date"] = pd.to_datetime(df.get("timestamp", datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+else:
+    df = pd.DataFrame(columns=["task", "completed", "date"])
+
+# Zeitraum auswählen
+zeitraum = st.selectbox("Zeitraum auswählen:", ["Gesamt", "Woche", "Monat"])
+
+# Daten filtern nach Zeitraum
+if zeitraum == "Woche":
+    df["period"] = df["date"].dt.to_period("W").dt.start_time
+elif zeitraum == "Monat":
+    df["period"] = df["date"].dt.to_period("M").dt.start_time
+else:
+    df["period"] = "Gesamt"
+
+# Gruppieren und zählen
+erfüllte = df[df["completed"]].groupby(["period", "task"]).size().unstack(fill_value=0)
+nicht_erfüllte = df[~df["completed"]].groupby(["period", "task"]).size().unstack(fill_value=0)
 
 # Erfüllte To-Dos anzeigen
 st.subheader("✅ Erfüllte To-Dos")
-if erfüllte_todos:
-    for todo in erfüllte_todos:
-        st.markdown(f"- {todo}")
+if not erfüllte.empty:
+    for period, tasks in erfüllte.iterrows():
+        st.markdown(f"**Zeitraum:** {period.strftime('%d.%m.%Y') if period != 'Gesamt' else 'Gesamt'}")
+        for task, count in tasks.items():
+            st.markdown(f"- {task}: {count}x")
 else:
     st.info("Es gibt keine erfüllten To-Dos.")
 
 # Nicht erfüllte To-Dos anzeigen
 st.subheader("❌ Nicht erfüllte To-Dos")
-if nicht_erfüllte_todos:
-    for todo in nicht_erfüllte_todos:
-        st.markdown(f"- {todo}")
+if not nicht_erfüllte.empty:
+    for period, tasks in nicht_erfüllte.iterrows():
+        st.markdown(f"**Zeitraum:** {period.strftime('%d.%m.%Y') if period != 'Gesamt' else 'Gesamt'}")
+        for task, count in tasks.items():
+            st.markdown(f"- {task}: {count}x")
 else:
-    st.info("Alle To-Dos wurden erfüllt!")
+    st.info("Es gibt keine nicht erfüllten To-Dos.")
