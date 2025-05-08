@@ -36,7 +36,8 @@ if st.button("Speichern"):
         result = {
             "date": datetime.now().strftime("%Y-%m-%d"),
             "time": datetime.now().strftime("%H:%M:%S"),
-            "entry": user_input.strip()
+            "entry": user_input.strip(),
+             "satisfaction": satisfaction  # Zufriedenheit hinzufügen
         }
 
         # Speichern in einer Textdatei (optional, falls benötigt)
