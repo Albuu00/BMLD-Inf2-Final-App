@@ -62,9 +62,15 @@ st.subheader("Wetterbericht")
 weather_message = generate_weather_message(weather_data)
 st.write(weather_message)
 
-# Initiale To-Do-Liste
-if "todos" not in st.session_state:
-    st.session_state.todos = [
+# Funktion, um To-Dos aus der Datenbank zu laden
+def load_todos():
+    # Lade die gespeicherten To-Dos aus der Datenbank
+    todos = DataManager().get_records(session_state_key='data_df')
+    if todos:
+        st.session_state.todos = todos
+    else:
+        # Falls keine To-Dos vorhanden sind, initialisiere die Standard-To-Dos
+        st.session_state.todos = [
         {"task": "2 Liter Wasser trinken", "completed": False},
         {"task": "Spazieren", "completed": False},
         {"task": "10 Minuten Dehnen", "completed": False},
@@ -74,6 +80,10 @@ if "todos" not in st.session_state:
         {"task": "Etwas aufräumen oder putzen", "completed": False},
         {"task": "Mindestens eine Stunde Handypause", "completed": False}
     ]
+
+# To-Dos beim Laden der Seite initialisieren
+if "todos" not in st.session_state:
+    load_todos()
 
 # Funktion zum Abhaken von Aufgaben
 def toggle_task(index):
