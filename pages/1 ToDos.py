@@ -9,6 +9,19 @@ LoginManager().go_to_login('Start.py')
 import streamlit as st
 import requests
 
+import os
+
+# Datei-Pfad für die Datenbank
+file_path = "data.csv"
+
+# Initialisiere "data_df" in st.session_state, falls es nicht existiert
+if "data_df" not in st.session_state:
+    if os.path.exists(file_path):
+        # Lade die Daten aus der Datei
+        st.session_state.data_df = pd.read_csv(file_path)
+    else:
+        # Erstelle ein leeres DataFrame, falls die Datei nicht existiert
+        st.session_state.data_df = pd.DataFrame(columns=["task", "completed", "timestamp"])
 
 # OpenWeatherMap API-Schlüssel und Basis-URL
 API_KEY = "b08ff895beacec99a194e0aa80c2aac4"  # Ersetze dies durch deinen OpenWeatherMap-API-Schlüssel
