@@ -9,6 +9,20 @@ LoginManager().go_to_login('Start.py')
 import streamlit as st
 import requests
 
+class DataManager:
+    def __init__(self):
+        # Initialisiere die Verbindung zur Datenbank oder Datei
+        self.file_path = "todos.json"  # Beispiel: JSON-Datei zur Speicherung
+
+    def get_records(self, session_state_key):
+        # Lade die Daten aus der JSON-Datei
+        try:
+            with open(self.file_path, "r", encoding="utf-8") as file:
+                data = json.load(file)
+            return data.get(session_state_key, [])
+        except FileNotFoundError:
+            return []  # Falls die Datei nicht existiert, gib eine leere Liste zurück
+
 # OpenWeatherMap API-Schlüssel und Basis-URL
 API_KEY = "b08ff895beacec99a194e0aa80c2aac4"  # Ersetze dies durch deinen OpenWeatherMap-API-Schlüssel
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
