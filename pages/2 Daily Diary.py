@@ -61,8 +61,10 @@ st.subheader("Deine bisherigen Einträge")
 try:
     if not diary_data.empty:
         for index, row in diary_data.iterrows():
+            # Einträge mit Emojis anzeigen
             st.markdown(f"**Datum:** {row['date']} **Zeit:** {row['time']}")
             st.markdown(f"> {row['entry']}")
+            st.markdown(f"**Zufriedenheit:** {row['satisfaction']}")
             st.markdown("---")  # Trennlinie zwischen Einträgen
     else:
         st.info("Es gibt noch keine gespeicherten Einträge.")
