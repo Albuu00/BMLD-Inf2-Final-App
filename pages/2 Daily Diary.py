@@ -7,6 +7,8 @@ LoginManager().go_to_login('Start.py')
 # ====== End Login Block ======
 import streamlit as st
 
+diary_data.to_csv(file_path, index=False, encoding="utf-8")
+
 # Titel der App
 st.title("My Daily Diary")
 import requests
