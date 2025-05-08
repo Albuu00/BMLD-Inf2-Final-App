@@ -52,9 +52,14 @@ def generate_weather_message(weather_data):
 # Wetterdaten abrufen
 weather_data = get_weather()
 
-# Aktuelles Datum, Wochentag und Uhrzeit
-current_time = datetime.now().strftime("%A, %d. %B %Y, %H:%M:%S")
+from datetime import datetime
+import pytz  # Zeitzonen-Bibliothek
 
+# Zeitzone für Zürich festlegen
+zurich_tz = pytz.timezone("Europe/Zurich")
+
+# Aktuelles Datum, Wochentag und Uhrzeit in der Zeitzone von Zürich
+current_time = datetime.now(zurich_tz).strftime("%A, %d. %B %Y, %H:%M:%S")
 # Titel der Seite mit Datum und Zeit
 st.title(f"To-Do Liste  |  {current_time}")
 
