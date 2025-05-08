@@ -106,6 +106,15 @@ if st.button("Hinzufügen"):
     else:
         st.error("Das To-Do-Feld darf nicht leer sein.")
 
+# Neues To-Do in die Datenbank speichern
+if "data_df" in st.session_state:
+    st.session_state.data_df = pd.concat(
+        [st.session_state.data_df, pd.DataFrame([new_todo_entry])], ignore_index=True
+    )
+    st.session_state.data_df.to_csv(file_path, index=False)
+else:
+    st.error("Datenbank konnte nicht gefunden werden.")
+
 # To-Do-Liste anzeigen
 for i, todo in enumerate(st.session_state.todos):
     col1, col2, col3 = st.columns([0.1, 0.8, 0.1])
