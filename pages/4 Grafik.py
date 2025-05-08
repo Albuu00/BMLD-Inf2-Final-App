@@ -1,69 +1,58 @@
-from datetime import datetime
-# ====== Start Login Block ======
-from utils.login_manager import LoginManager
-from utils.data_manager import DataManager
-LoginManager().go_to_login('Start.py') 
-# ====== End Login Block ======
-
-import streamlit as st
 import pandas as pd
+import streamlit as st
 import matplotlib.pyplot as plt
-from datetime import datetime, timedelta
 
-# Beispiel-Daten (du kannst diese durch deine echten Daten ersetzen)
-if "todos_data" not in st.session_state:
-    st.session_state.todos_data = pd.DataFrame({
-        "task": ["2 Liter Wasser trinken", "Spazieren", "Einkaufen", "Lesen"],
-        "completed": [True, False, True, False],
-        "timestamp": [
-            datetime.now() - timedelta(days=1),
-            datetime.now() - timedelta(days=2),
-            datetime.now() - timedelta(days=7),
-            datetime.now() - timedelta(days=30),
-        ]
-    })
-
-# Titel der Seite
-st.title("To-Do Statistiken")
-
-# Auswahl der Dauer
-duration = st.selectbox(
-    "Zeitraum auswählen:",
-    options=["1 Tag", "1 Woche", "1 Monat"]
-)
-
-# Filtere die Daten basierend auf der Auswahl
-if duration == "1 Tag":
-    start_date = datetime.now() - timedelta(days=1)
-elif duration == "1 Woche":
-    start_date = datetime.now() - timedelta(weeks=1)
-elif duration == "1 Monat":
-    start_date = datetime.now() - timedelta(days=30)
-
-filtered_data = st.session_state.todos_data[
-    st.session_state.todos_data["timestamp"] >= start_date
+# Beispiel-Daten (ersetze dies durch deine echten To-Do-Daten)
+data = [
+    {"task": "2 Liter Wasser trinken", "completed": True, "date": "2025-05-01"},
+    {"task": "2 Liter Wasser trinken", "completed": False, "date": "2025-05-02"},
+    {"task": "Spazieren", "completed": True, "date": "2025-05-03"},
+    {"task": "Spazieren", "completed": True, "date": "2025-05-04"},
+    {"task": "10 Minuten Dehnen", "completed": False, "date": "2025-05-05"},
+    {"task": "10 Minuten Dehnen", "completed": True, "date": "2025-05-06"},
+    {"task": "Mindestens eine Frucht gegessen", "completed": True, "date": "2025-05-07"},
+    {"task": "Mindestens eine Frucht gegessen", "completed": False, "date": "2025-05-08"},
 ]
 
-# Erledigte und nicht erledigte To-Dos filtern
-completed_todos = filtered_data[filtered_data["completed"]]
-not_completed_todos = filtered_data[~filtered_data["completed"]]
+# Daten in ein DataFrame laden
+df = pd.DataFrame(data)
 
-# Funktion zum Erstellen eines Liniendiagramms
-def plot_line_chart(data, title):
-    if data.empty:
-        st.write(f"Keine Daten für {title.lower()}.")
-        return
-    counts = data.groupby(data["timestamp"].dt.date).size()
-    fig, ax = plt.subplots()
-    counts.plot(kind="line", ax=ax, marker="o")
-    ax.set_title(title)
-    ax.set_xlabel("Datum")
-    ax.set_ylabel("Anzahl der To-Dos")
-    st.pyplot(fig)
+# Datum in datetime umwandeln und Woche extrahieren
+df["date"] = pd.to_datetime(df["date"])
+df["week"] = df["date"].dt.strftime("%Y-%U")  # Jahr-Woche Format
 
-# Grafiken anzeigen
-st.subheader("Erledigte To-Dos")
-plot_line_chart(completed_todos, "Erledigte To-Dos")
+# Streamlit-Filter für die Dauer
+duration = st.selectbox("Zeitraum auswählen:", ["pro Woche", "pro Monat"])
 
-st.subheader("Nicht erledigte To-Dos")
-plot_line_chart(not_completed_todos, "Nicht erledigte To-Dos")
+if duration == "pro Monat":
+    df["period"] = df["date"].dt.strftime("%Y-%m")  # Jahr-Monat Format
+else:
+    df["period"] = df["week"]  # Jahr-Woche Format
+
+# Gruppieren und zählen: Erfüllte To-Dos
+completed = df[df["completed"]].groupby(["period", "task"]).size().unstack(fill_value=0)
+
+# Gruppieren und zählen: Nicht erfüllte To-Dos
+not_completed = df[~df["completed"]].groupby(["period", "task"]).size().unstack(fill_value=0)
+
+# Diagramm für erfüllte To-Dos
+st.subheader("Erfüllte To-Dos")
+fig, ax = plt.subplots(figsize=(10, 6))
+for task in completed.columns:
+    ax.plot(completed.index, completed[task], label=task, marker="o")
+ax.set_title("Erfüllte To-Dos pro Zeitraum")
+ax.set_xlabel("Zeitraum")
+ax.set_ylabel("Anzahl erfüllt")
+ax.legend()
+st.pyplot(fig)
+
+# Diagramm für nicht erfüllte To-Dos
+st.subheader("Nicht erfüllte To-Dos")
+fig, ax = plt.subplots(figsize=(10, 6))
+for task in not_completed.columns:
+    ax.plot(not_completed.index, not_completed[task], label=task, marker="o")
+ax.set_title("Nicht erfüllte To-Dos pro Zeitraum")
+ax.set_xlabel("Zeitraum")
+ax.set_ylabel("Anzahl nicht erfüllt")
+ax.legend()
+st.pyplot(fig)
