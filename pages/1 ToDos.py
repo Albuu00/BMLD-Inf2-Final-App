@@ -9,19 +9,6 @@ LoginManager().go_to_login('Start.py')
 import streamlit as st
 import requests
 
-class DataManager:
-    def __init__(self):
-        # Initialisiere die Verbindung zur Datenbank oder Datei
-        self.file_path = "todos.json"  # Beispiel: JSON-Datei zur Speicherung
-
-    def get_records(self, session_state_key):
-        # Lade die Daten aus der JSON-Datei
-        try:
-            with open(self.file_path, "r", encoding="utf-8") as file:
-                data = json.load(file)
-            return data.get(session_state_key, [])
-        except FileNotFoundError:
-            return []  # Falls die Datei nicht existiert, gib eine leere Liste zurück
 
 # OpenWeatherMap API-Schlüssel und Basis-URL
 API_KEY = "b08ff895beacec99a194e0aa80c2aac4"  # Ersetze dies durch deinen OpenWeatherMap-API-Schlüssel
@@ -76,15 +63,9 @@ st.subheader("Wetterbericht")
 weather_message = generate_weather_message(weather_data)
 st.write(weather_message)
 
-# Funktion, um To-Dos aus der Datenbank zu laden
-def load_todos():
-    # Lade die gespeicherten To-Dos aus der Datenbank
-    todos = DataManager().get_records(session_state_key='data_df')
-    if todos:
-        st.session_state.todos = todos
-    else:
-        # Falls keine To-Dos vorhanden sind, initialisiere die Standard-To-Dos
-        st.session_state.todos = [
+# Initiale To-Do-Liste
+if "todos" not in st.session_state:
+    st.session_state.todos = [
         {"task": "2 Liter Wasser trinken", "completed": False},
         {"task": "Spazieren", "completed": False},
         {"task": "10 Minuten Dehnen", "completed": False},
@@ -103,11 +84,6 @@ if "todos" not in st.session_state:
 def toggle_task(index):
     st.session_state.todos[index]["completed"] = not st.session_state.todos[index]["completed"]
     
-    # Aktuelles Todo als record_dict speichern
-    current_todo = st.session_state.todos[index]
-    current_todo["timestamp"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Zeitstempel hinzufügen
-    DataManager().append_record(session_state_key='data_df', record_dict=current_todo)
-
 # Eingabefeld und Button zum Hinzufügen neuer To-Dos
 st.subheader("Neues To-Do hinzufügen")
 new_todo = st.text_input("Gib ein neues To-Do ein:")
