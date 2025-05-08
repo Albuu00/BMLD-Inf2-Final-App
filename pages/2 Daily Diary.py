@@ -48,12 +48,13 @@ if st.button("Speichern"):
             file.write(f"{result['date']} {result['time']} - {result['entry']} ({result['satisfaction']})\n")
 
         # Speichern in die CSV-Datei
-        diary_data = diary_data.append(result, ignore_index=True)  # Neuen Eintrag hinzufügen
+        new_row = pd.DataFrame([result])  # Neuen Eintrag als DataFrame erstellen
+        diary_data = pd.concat([diary_data, new_row], ignore_index=True)  # Zeile hinzufügen
         diary_data.to_csv(file_path, index=False, encoding="utf-8")  # CSV-Datei speichern
 
         st.success("Dein Text wurde gespeichert!")
     else:
-        st.error("Das Textfeld darf nicht leer sein.")  
+        st.error("Das Textfeld darf nicht leer sein.")
 
 # Gespeicherte Einträge anzeigen
 st.subheader("Deine bisherigen Einträge")
