@@ -1,10 +1,3 @@
-task,completed,date,time,entry,satisfaction
-2 Liter Wasser trinken,False,,,,
-Spazieren,False,,,,
-10 Minuten Dehnen,False,,,,
-Mindestens eine Frucht gegessen,False,,,,
-Mindestens ein Gemüse gegessen,False,,,,
-7 bis 8 Stunden geschlafen,False,,,,
-Etwas aufräumen oder putzen,False,,,,
-Mindestens eine Stunde Handypause,False,,,,
-,,2025-05-08,10:04:21,alles gut,🙂 Zufrieden
+date,time,entry,satisfaction
+2025-05-08,10:07:54,alles gut,🙂 Zufrieden
+2025-05-08,10:08:06,ich bin müde,☹️ Unzufrieden
