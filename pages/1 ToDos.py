@@ -9,8 +9,6 @@ LoginManager().go_to_login('Start.py')
 import streamlit as st
 import requests
 
-import os
-
 # OpenWeatherMap API-Schlüssel und Basis-URL
 API_KEY = "b08ff895beacec99a194e0aa80c2aac4"  # Ersetze dies durch deinen OpenWeatherMap-API-Schlüssel
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
