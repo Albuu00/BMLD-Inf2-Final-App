@@ -1,10 +1,5 @@
 import pandas as pd
 from datetime import datetime
-# ====== Start Login Block ======
-from utils.login_manager import LoginManager
-from utils.data_manager import DataManager
-LoginManager().go_to_login('Start.py') 
-# ====== End Login Block ======
 import streamlit as st
 
 # Datei-Pfad für die CSV-Datei
@@ -14,11 +9,18 @@ file_path = "data.csv"
 try:
     if pd.io.common.file_exists(file_path):
         diary_data = pd.read_csv(file_path, encoding="utf-8")  # CSV-Datei laden
+        # Überprüfen, ob die erwarteten Spalten existieren
+        if not all(col in diary_data.columns for col in ["date", "time", "entry", "satisfaction"]):
+            raise ValueError("Die Datei enthält nicht die erwarteten Spalten.")
+        # Fehlende Werte (NaN) durch leere Strings ersetzen
+        diary_data = diary_data.fillna("")
     else:
         # Falls die Datei nicht existiert, initialisiere ein leeres DataFrame
         diary_data = pd.DataFrame(columns=["date", "time", "entry", "satisfaction"])
 except Exception as e:
     st.error(f"Fehler beim Laden der Datei: {e}")
+    # Initialisiere ein leeres DataFrame, falls ein Fehler auftritt
+    diary_data = pd.DataFrame(columns=["date", "time", "entry", "satisfaction"])
 
 # Titel der App
 st.title("My Daily Diary")
