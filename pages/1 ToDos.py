@@ -91,10 +91,14 @@ if st.button("Hinzufügen"):
 for i, todo in enumerate(st.session_state.todos):
     col1, col2, col3 = st.columns([0.1, 0.8, 0.1])
     with col1:
-              # Checkbox zum Abhaken
-        checked = st.checkbox("", value=todo["completed"], key=f"todo_{i}")
-        if checked != todo["completed"]:
-            toggle_task(i)
+        # Checkbox zum Abhaken
+        st.checkbox(
+            "",
+            value=todo["completed"],
+            key=f"todo_{i}",
+            on_change=toggle_task,
+            args=(i,),  # Übergibt den Index an die Funktion toggle_task
+        )
     with col2:
         # Aufgabe anzeigen (grau, wenn abgehakt)
         if todo["completed"]:
@@ -105,5 +109,4 @@ for i, todo in enumerate(st.session_state.todos):
         # Button zum Löschen der Aufgabe
         if st.button("🗑️", key=f"delete_{i}"):
             st.session_state.todos.pop(i)
-            st.rerun()
-            
+            st.experimental_rerun()  # Seite neu laden, um die Änderungen anzuzeigen
