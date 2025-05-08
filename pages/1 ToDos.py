@@ -88,12 +88,9 @@ if "todos" not in st.session_state:
 def toggle_task(index):
     st.session_state.todos[index]["completed"] = not st.session_state.todos[index]["completed"]
     
-# Neues To-Do hinzufügen
+# Eingabefeld und Button zum Hinzufügen neuer To-Dos
 st.subheader("Neues To-Do hinzufügen")
 new_todo = st.text_input("Gib ein neues To-Do ein:")
-
-# Initialisiere new_todo_entry mit None
-new_todo_entry = None
 
 if st.button("Hinzufügen"):
     if new_todo.strip():  # Überprüfen, ob das Eingabefeld nicht leer ist
@@ -102,22 +99,6 @@ if st.button("Hinzufügen"):
         
         # Neues To-Do zur Session-State-Liste hinzufügen
         st.session_state.todos.append(new_todo_entry)
-        
-        # Neues To-Do in die Datenbank speichern
-        DataManager().append_record(session_state_key='data_df', record_dict=new_todo_entry)
-        
-        st.success(f"'{new_todo}' wurde zur To-Do-Liste hinzugefügt!")
-    else:
-        st.error("Das To-Do-Feld darf nicht leer sein.")
-
-# Neues To-Do in die Datenbank speichern
-if new_todo_entry is not None and "data_df" in st.session_state:
-    st.session_state.data_df = pd.concat(
-        [st.session_state.data_df, pd.DataFrame([new_todo_entry])], ignore_index=True
-    )
-    st.session_state.data_df.to_csv(file_path, index=False)
-elif "data_df" not in st.session_state:
-    st.error("Datenbank konnte nicht gefunden werden.")
 
 # To-Do-Liste anzeigen
 for i, todo in enumerate(st.session_state.todos):
