@@ -6,9 +6,21 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 
+# Initialisierung des Data Managers
+data_manager = DataManager(fs_protocol='webdav', fs_root_folder="HealthySync")
+
 # Überprüfen, ob die To-Do-Liste existiert
 if "todos" not in st.session_state:
-    st.session_state.todos = []
+    # Lade die Daten aus SwitchDrive
+    try:
+        data_manager.load_app_data(
+            session_state_key="todos",
+            file_name="todos.csv",
+            initial_value=[]
+        )
+    except Exception as e:
+        st.error(f"Fehler beim Laden der Daten: {e}")
+        st.session_state.todos = []
 
 st.title("Übersicht der To-Dos")
 
@@ -53,3 +65,15 @@ if not nicht_erfüllte.empty:
             st.markdown(f"- {task}: {count}x")
 else:
     st.info("Es gibt keine nicht erfüllten To-Dos.")
+
+# Button zum Speichern der Daten
+if st.button("Daten speichern"):
+    try:
+        # Speichere die Daten in SwitchDrive
+        data_manager.save_app_data(
+            session_state_key="todos",
+            file_name="todos.csv"
+        )
+        st.success("Daten wurden erfolgreich in SwitchDrive gespeichert!")
+    except Exception as e:
+        st.error(f"Fehler beim Speichern der Daten: {e}")
