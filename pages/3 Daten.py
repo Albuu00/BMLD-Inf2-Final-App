@@ -7,8 +7,6 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 
-# Initialisierung des Data Managers
-data_manager = DataManager(fs_protocol='webdav', fs_root_folder="HealthySync")
 
 # Überprüfen, ob die To-Do-Liste existiert
 if "todos" not in st.session_state:
