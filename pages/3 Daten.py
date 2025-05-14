@@ -7,27 +7,18 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 
-
-# Überprüfen, ob die To-Do-Liste existiert
-if "todos" not in st.session_state:
-    # Lade die Daten aus SwitchDrive
-    try:
-        data_manager.load_app_data(
-            session_state_key="todos",
-            file_name="todos.csv",
-            initial_value=[]
-        )
-    except Exception as e:
-        st.error(f"Fehler beim Laden der Daten: {e}")
-        st.session_state.todos = []
-
 st.title("Übersicht der To-Dos")
 
 # To-Do-Daten in ein DataFrame umwandeln
-if st.session_state.todos:
+if "todos" in st.session_state and st.session_state.todos:
     df = pd.DataFrame(st.session_state.todos)
-    df["date"] = pd.to_datetime(df.get("timestamp", datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+    # Überprüfen, ob die Spalte "date" existiert
+    if "date" not in df.columns:
+        df["date"] = datetime.now().strftime("%Y-%m-%d")  # Füge das aktuelle Datum hinzu
+    else:
+        df["date"] = pd.to_datetime(df["date"])  # Stelle sicher, dass "date" ein Datumsformat hat
 else:
+    # Initialisiere ein leeres DataFrame mit den erwarteten Spalten
     df = pd.DataFrame(columns=["task", "completed", "date"])
 
 # Zeitraum auswählen
@@ -69,6 +60,7 @@ else:
 if st.button("Daten speichern"):
     try:
         # Speichere die Daten in SwitchDrive
+        data_manager = DataManager(fs_protocol='webdav', fs_root_folder="HealthySync")
         data_manager.save_app_data(
             session_state_key="todos",
             file_name="todos.csv"
@@ -76,3 +68,10 @@ if st.button("Daten speichern"):
         st.success("Daten wurden erfolgreich in SwitchDrive gespeichert!")
     except Exception as e:
         st.error(f"Fehler beim Speichern der Daten: {e}")
+
+# Bisherige Daten anzeigen
+st.subheader("📋 Bisherige To-Dos")
+if not df.empty:
+    st.dataframe(df)  # Zeigt die Daten in einer interaktiven Tabelle an
+else:
+    st.info("Es gibt keine gespeicherten To-Dos.")
