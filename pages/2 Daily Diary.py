@@ -58,6 +58,9 @@ if st.button("Speichern"):
     else:
         st.error("Das Textfeld darf nicht leer sein.")
 
+        # Diary Eintrag auf Switchdrive speichern
+        DataManager().append_record(session_state_key="dailydiary", record_dict=result)
+
 # Gespeicherte Einträge anzeigen
 st.subheader("Deine bisherigen Einträge")
 try:

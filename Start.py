@@ -32,6 +32,11 @@ data_manager.load_user_data(
     file_name="to_do.csv",
     initial_value=pd.DataFrame()
 )
+
+data_manager.load_user_data(
+    session_state_key="dailydiary",
+    file_name="daily_diary.csv",
+    initial_value=pd.DataFrame()
 # except ValueError as e:
 #     st.error(f"Fehler beim Laden der Daten: {e}")
 #     # Erstelle eine leere Datei, falls sie fehlt oder fehlerhaft ist
