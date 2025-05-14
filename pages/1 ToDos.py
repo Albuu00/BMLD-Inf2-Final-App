@@ -54,6 +54,7 @@ weather_data = get_weather()
 from datetime import datetime
 import pytz  # Zeitzonen-Bibliothek
 
+
 # Zeitzone für Zürich festlegen
 zurich_tz = pytz.timezone("Europe/Zurich")
 
@@ -98,10 +99,14 @@ if st.button("Hinzufügen"):
         new_todo_entry = {"task": new_todo.strip(), "completed": False, "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
         
         # Neues To-Do zur Session-State-Liste hinzufügen
-        st.session_state.todos.append(new_todo_entry)
+        #st.session_state.todos.append(new_todo_entry)
+        DataManager().append_record(session_state_key="todos", record_dict=new_todo_entry)
 
 # To-Do-Liste anzeigen
 for i, todo in enumerate(st.session_state.todos):
+    print(st.session_state.todos)
+    print(type(i))
+    print(i, todo)
     col1, col2, col3 = st.columns([0.1, 0.8, 0.1])
     with col1:
               # Checkbox zum Abhaken
