@@ -70,8 +70,7 @@ weather_message = generate_weather_message(weather_data)
 st.write(weather_message)
 
 # Initiale To-Do-Liste
-if "todos" not in st.session_state:
-    st.session_state.todos = [
+default_todos = [
         {"task": "2 Liter Wasser trinken", "completed": False},
         {"task": "Spazieren", "completed": False},
         {"task": "10 Minuten Dehnen", "completed": False},
@@ -82,9 +81,21 @@ if "todos" not in st.session_state:
         {"task": "Mindestens eine Stunde Handypause", "completed": False}
     ]
 
-# To-Dos beim Laden der Seite initialisieren
+# Sicherstellen, dass todos initialisiert ist
 if "todos" not in st.session_state:
-    load_todos()
+    st.session_state.todos = default_todos.copy()
+else:
+    # Debugging: Überprüfe den Inhalt von todos
+    #st.write("Aktueller Inhalt von todos:", st.session_state.todos)
+
+    # Filtere ungültige Elemente aus todos
+    st.session_state.todos = [todo for todo in st.session_state.todos if isinstance(todo, dict) and "task" in todo]
+
+    # Füge fehlende vorgeschlagene To-Dos hinzu, falls sie gelöscht wurden
+    existing_tasks = {todo["task"] for todo in st.session_state.todos}  # Set mit vorhandenen Aufgaben
+    for todo in default_todos:
+        if todo["task"] not in existing_tasks:  # Überprüfen, ob der Task bereits existiert
+            st.session_state.todos.append(todo)
 
 # Funktion zum Abhaken von Aufgaben
 def toggle_task(index):
@@ -100,17 +111,17 @@ if st.button("Hinzufügen"):
         new_todo_entry = {"task": new_todo.strip(), "completed": False, "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
         
         # Neues To-Do zur Session-State-Liste hinzufügen
+        #st.session_state.todos.append(new_todo_entry)
         DataManager().append_record(session_state_key="todos", record_dict=new_todo_entry)
-
+    
 # To-Do-Liste anzeigen
-if st.session_state.todos:
 for i, todo in enumerate(st.session_state.todos):
     print(st.session_state.todos)
     print(type(i))
     print(i, todo)
     col1, col2, col3 = st.columns([0.1, 0.8, 0.1])
     with col1:
-        # Checkbox zum Abhaken
+              # Checkbox zum Abhaken
         checked = st.checkbox("", value=todo["completed"], key=f"todo_{i}")
         if checked != todo["completed"]:
             toggle_task(i)
