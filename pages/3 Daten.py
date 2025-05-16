@@ -68,10 +68,3 @@ if st.button("Daten speichern"):
         st.success("Daten wurden erfolgreich in SwitchDrive gespeichert!")
     except Exception as e:
         st.error(f"Fehler beim Speichern der Daten: {e}")
-
-# Bisherige Daten anzeigen
-st.subheader("📋 Bisherige To-Dos")
-if not df.empty:
-    st.dataframe(df)  # Zeigt die Daten in einer interaktiven Tabelle an
-else:
-    st.info("Es gibt keine gespeicherten To-Dos.")
