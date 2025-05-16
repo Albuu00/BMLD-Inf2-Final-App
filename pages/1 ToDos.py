@@ -9,6 +9,7 @@ LoginManager().go_to_login('Start.py')
 import streamlit as st
 import requests
 
+
 # OpenWeatherMap API-Schlüssel und Basis-URL
 API_KEY = "b08ff895beacec99a194e0aa80c2aac4"  # Ersetze dies durch deinen OpenWeatherMap-API-Schlüssel
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
@@ -99,17 +100,17 @@ if st.button("Hinzufügen"):
         new_todo_entry = {"task": new_todo.strip(), "completed": False, "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
         
         # Neues To-Do zur Session-State-Liste hinzufügen
-        #st.session_state.todos.append(new_todo_entry)
         DataManager().append_record(session_state_key="todos", record_dict=new_todo_entry)
 
 # To-Do-Liste anzeigen
+if st.session_state.todos:
 for i, todo in enumerate(st.session_state.todos):
     print(st.session_state.todos)
     print(type(i))
     print(i, todo)
     col1, col2, col3 = st.columns([0.1, 0.8, 0.1])
     with col1:
-              # Checkbox zum Abhaken
+        # Checkbox zum Abhaken
         checked = st.checkbox("", value=todo["completed"], key=f"todo_{i}")
         if checked != todo["completed"]:
             toggle_task(i)
