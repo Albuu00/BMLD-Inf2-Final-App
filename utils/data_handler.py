@@ -53,7 +53,7 @@ class DataHandler:
             The content of the file as a string.
         """
         full_path = self._resolve_path(relative_path)
-        with self.filesystem.open(full_path, "r") as f:
+        with self.filesystem.open(full_path, "r", encoding="utf-8") as f:
             return f.read()
 
     def read_binary(self, relative_path):

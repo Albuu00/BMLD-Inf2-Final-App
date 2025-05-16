@@ -26,7 +26,11 @@ LoginManager().go_to_login('Start.py')
 #     # Initialisiere ein leeres DataFrame, falls ein Fehler auftritt
 #     diary_data = pd.DataFrame(columns=["date", "time", "entry", "satisfaction"])
 
-# Titel der App
+# Initialisiere "dailydiary" in st.session_state, falls es nicht existiert
+if "dailydiary" not in st.session_state:
+    st.session_state.dailydiary = pd.DataFrame(columns=["date", "time", "entry", "satisfaction"])
+
+# Titel der Seite
 st.title("My Daily Diary")
 
 # Textfeld für den Nutzer
