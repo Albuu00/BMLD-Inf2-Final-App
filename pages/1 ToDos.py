@@ -99,8 +99,12 @@ else:
 
 # Funktion zum Abhaken von Aufgaben
 def toggle_task(index):
+    # Status der Aufgabe umschalten
     st.session_state.todos[index]["completed"] = not st.session_state.todos[index]["completed"]
     
+    # Änderungen in der persistenten Speicherung aktualisieren
+    DataManager().save_data(session_state_key="todos")
+
 # Eingabefeld und Button zum Hinzufügen neuer To-Dos
 st.subheader("Neues To-Do hinzufügen")
 new_todo = st.text_input("Gib ein neues To-Do ein:")
@@ -111,17 +115,18 @@ if st.button("Hinzufügen"):
         new_todo_entry = {"task": new_todo.strip(), "completed": False, "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
         
         # Neues To-Do zur Session-State-Liste hinzufügen
-        #st.session_state.todos.append(new_todo_entry)
+        st.session_state.todos.append(new_todo_entry)
+        
+        # Änderungen in der persistenten Speicherung aktualisieren
         DataManager().append_record(session_state_key="todos", record_dict=new_todo_entry)
-    
+        st.success("Neues To-Do wurde hinzugefügt!")
+
 # To-Do-Liste anzeigen
+st.subheader("Deine To-Do-Liste")
 for i, todo in enumerate(st.session_state.todos):
-    print(st.session_state.todos)
-    print(type(i))
-    print(i, todo)
     col1, col2, col3 = st.columns([0.1, 0.8, 0.1])
     with col1:
-              # Checkbox zum Abhaken
+        # Checkbox zum Abhaken
         checked = st.checkbox("", value=todo["completed"], key=f"todo_{i}")
         if checked != todo["completed"]:
             toggle_task(i)
@@ -135,5 +140,6 @@ for i, todo in enumerate(st.session_state.todos):
         # Button zum Löschen der Aufgabe
         if st.button("🗑️", key=f"delete_{i}"):
             st.session_state.todos.pop(i)
+            DataManager().save_data(session_state_key="todos")  # Änderungen speichern
             st.rerun()
             

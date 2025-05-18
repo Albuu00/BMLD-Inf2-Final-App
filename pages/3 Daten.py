@@ -31,9 +31,9 @@ zeitraum = st.selectbox("Zeitraum auswählen:", ["Gesamt", "Woche", "Monat"])
 
 # Zeitraum-Spalte berechnen
 if zeitraum == "Woche":
-    df["period"] = df["date"].dt.to_period("W").dt.start_time
+    df["period"] = df["date"].dt.to_period("W").apply(lambda r: r.start_time)  # Startdatum der Woche
 elif zeitraum == "Monat":
-    df["period"] = df["date"].dt.to_period("M").dt.start_time
+    df["period"] = df["date"].dt.to_period("M").apply(lambda r: r.start_time)  # Startdatum des Monats
 else:
     df["period"] = "Gesamt"
 
@@ -74,7 +74,6 @@ if st.button("Daten speichern"):
                 for task, count in tasks.items():
                     record = {"task": task, "count": count, "period": str(period), "status": "erfüllt"}
                     dm.append_record(session_state_key="daten", record_dict=record)
-            st.success("Erfüllte To-Dos wurden erfolgreich gespeichert!")
 
         # Nicht erfüllte speichern
         if not nicht_erfüllte.empty:
@@ -82,8 +81,9 @@ if st.button("Daten speichern"):
                 for task, count in tasks.items():
                     record = {"task": task, "count": count, "period": str(period), "status": "nicht erfüllt"}
                     dm.append_record(session_state_key="daten", record_dict=record)
-            st.success("Nicht erfüllte To-Dos wurden erfolgreich gespeichert!")
 
+        st.success("To-Dos wurden erfolgreich gespeichert!")
     except Exception as e:
         st.error(f"Fehler beim Speichern der Daten: {e}")
+
 
