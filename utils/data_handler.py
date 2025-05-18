@@ -122,6 +122,7 @@ class DataHandler:
         else:
             return self.read_binary(relative_path)
 
+
     def save(self, relative_path, content):
         """
         Save data to a file based on its extension.
@@ -142,8 +143,19 @@ class DataHandler:
 
         ext = posixpath.splitext(relative_path)[-1].lower()
 
+        print("DEBUG – Content type:", type(content))
+        print("DEBUG – File extension:", ext)
+
         if isinstance(content, pd.DataFrame) and ext == ".csv":
             self.write_text(relative_path, content.to_csv(index=False))
+        elif isinstance(content, list) and ext == ".csv":
+            try:
+                df = pd.DataFrame(content)
+                self.write_text(relative_path, df.to_csv(index=False))
+            except Exception as e:
+                raise ValueError(f"Could not convert list to CSV: {e}")
+        elif isinstance(content, str) and ext == ".csv":
+            self.write_text(relative_path, content)
         elif isinstance(content, (dict, list)) and ext == ".json":
             self.write_text(relative_path, json.dumps(content, indent=4))
         elif isinstance(content, (dict, list)) and ext in [".yaml", ".yml"]:
@@ -153,4 +165,5 @@ class DataHandler:
         elif isinstance(content, bytes):
             self.write_binary(relative_path, content)
         else:
-            raise ValueError(f"Unsupported content type for extension {ext}")
+            raise ValueError(f"Unsupported content type for extension {ext} and type {type(content)}")
+    
