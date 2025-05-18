@@ -32,54 +32,29 @@ elif zeitraum == "Monat":
 else:
     df["period"] = "Gesamt"
 
-# ...existing code...
-
 # Gruppieren und zählen
-if zeitraum == "Gesamt":
-    erfüllte = df[df["completed"]].groupby(["task"]).size()
-    nicht_erfüllte = df[~df["completed"]].groupby(["task"]).size()
-else:
-    erfüllte = df[df["completed"]].groupby(["period", "task"]).size().unstack(fill_value=0)
-    nicht_erfüllte = df[~df["completed"]].groupby(["period", "task"]).size().unstack(fill_value=0)
+erfüllte = df[df["completed"]].groupby(["period", "task"]).size().unstack(fill_value=0)
+nicht_erfüllte = df[~df["completed"]].groupby(["period", "task"]).size().unstack(fill_value=0)
 
 # Erfüllte To-Dos anzeigen
 st.subheader("✅ Erfüllte To-Dos")
-if zeitraum == "Gesamt":
-    if not erfüllte.empty:
-        for task, count in erfüllte.items():
+if not erfüllte.empty:
+    for period, tasks in erfüllte.iterrows():
+        st.markdown(f"**Zeitraum:** {period.strftime('%d.%m.%Y') if period != 'Gesamt' else 'Gesamt'}")
+        for task, count in tasks.items():
             st.markdown(f"- {task}: {count}x")
-    else:
-        st.info("Es gibt keine erfüllten To-Dos.")
 else:
-    if not erfüllte.empty:
-        for period, tasks in erfüllte.iterrows():
-            st.markdown(f"**Zeitraum:** {period.strftime('%d.%m.%Y')}")
-            for task, count in tasks.items():
-                if count > 0:
-                    st.markdown(f"- {task}: {count}x")
-    else:
-        st.info("Es gibt keine erfüllten To-Dos.")
+    st.info("Es gibt keine erfüllten To-Dos.")
 
 # Nicht erfüllte To-Dos anzeigen
 st.subheader("❌ Nicht erfüllte To-Dos")
-if zeitraum == "Gesamt":
-    if not nicht_erfüllte.empty:
-        for task, count in nicht_erfüllte.items():
+if not nicht_erfüllte.empty:
+    for period, tasks in nicht_erfüllte.iterrows():
+        st.markdown(f"**Zeitraum:** {period.strftime('%d.%m.%Y') if period != 'Gesamt' else 'Gesamt'}")
+        for task, count in tasks.items():
             st.markdown(f"- {task}: {count}x")
-    else:
-        st.info("Es gibt keine nicht erfüllten To-Dos.")
 else:
-    if not nicht_erfüllte.empty:
-        for period, tasks in nicht_erfüllte.iterrows():
-            st.markdown(f"**Zeitraum:** {period.strftime('%d.%m.%Y')}")
-            for task, count in tasks.items():
-                if count > 0:
-                    st.markdown(f"- {task}: {count}x")
-    else:
-        st.info("Es gibt keine nicht erfüllten To-Dos.")
-
-# ...existing code...
-    
+    st.info("Es gibt keine nicht erfüllten To-Dos.")  
 # Button zum Speichern der Daten
 if st.button("Daten speichern"):
     try:
