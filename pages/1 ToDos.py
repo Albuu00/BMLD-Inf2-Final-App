@@ -102,7 +102,7 @@ def toggle_task(index):
     # Status der Aufgabe umschalten
     st.session_state.todos[index]["completed"] = not st.session_state.todos[index]["completed"]
     
-    # Änderungen in der persistenten Speicherung aktualisieren
+    # xÄnderungen in der persistenten Speicherung aktualisieren
     DataManager().save_data(session_state_key="todos")
 
 # Eingabefeld und Button zum Hinzufügen neuer To-Dos
