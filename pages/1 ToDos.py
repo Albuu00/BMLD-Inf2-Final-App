@@ -107,7 +107,7 @@ def toggle_task(index):
 
 # Eingabefeld und Button zum Hinzufügen neuer To-Dos
 st.subheader("Neues To-Do hinzufügen")
-new_todo = st.text_input("Gib ein neues To-Do ein:")
+new_todo = st.text_input("Gib ein neues To-Do ein (Achtung, keine Umlaute verwenden!):")
 
 if st.button("Hinzufügen"):
     if new_todo.strip():  # Überprüfen, ob das Eingabefeld nicht leer ist
