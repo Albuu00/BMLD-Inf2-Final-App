@@ -56,17 +56,18 @@ data_manager.load_user_data(
 
 # !! WICHTIG: Eure Emails müssen in der App erscheinen!!
 
+# Titel der Anwendung
 st.markdown("<h1 style='color:turquoise;'>HealthySync</h1>", unsafe_allow_html=True)
 
-# Streamlit über den Text unten direkt in die App - cool!
-"""
-Autoren:
-- Albulena Ibishi (ibishalb@students.zhaw.ch)
-- Simona Flachsmann (flachsim@students.zhaw.ch)
-- Aylin Ago (agoayl01@students.zhaw.ch)
+# Autoren und Beschreibung
+st.markdown("""
+### Autoren:
+- **Albulena Ibishi** (ibishalb@students.zhaw.ch)
+- **Simona Flachsmann** (flachsim@students.zhaw.ch)
+- **Aylin Ago** (agoayl01@students.zhaw.ch)
 
-Diese App ist ein Todo Reminder.
-""" 
+HealthySync ist ein Todo Reminder, der dir hilft, deine täglichen Aufgaben zu organisieren und zu verfolgen.
+""")
 # Buttons nebeneinander anzeigen
 col1, col2, col3, col4 = st.columns(4)
 
