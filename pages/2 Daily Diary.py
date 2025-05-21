@@ -39,7 +39,7 @@ user_input = st.text_area("Schreibe hier deine Gedanken:", placeholder="Dein Tex
 # Auswahl für Zufriedenheit mit Smileys
 satisfaction = st.radio(
     "Wie zufrieden bist du heute mit deinen erledigten To-Dos?",
-    options=["😃 Sehr zufrieden", "🙂 Zufrieden", "😐 Neutral", "☹️ Unzufrieden", "😢 Sehr unzufrieden"]
+    options=[" Sehr zufrieden", " Zufrieden", " Neutral", " Unzufrieden", " Sehr unzufrieden"]
 )
 
 # Button zum Speichern
