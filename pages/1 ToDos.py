@@ -75,9 +75,9 @@ default_todos = [
         {"task": "Spazieren", "completed": False},
         {"task": "10 Minuten Dehnen", "completed": False},
         {"task": "Mindestens eine Frucht gegessen", "completed": False},
-        {"task": "Mindestens ein Gemüse gegessen", "completed": False},
+        {"task": "Mindestens ein Gemuese gegessen", "completed": False},
         {"task": "7 bis 8 Stunden geschlafen", "completed": False},
-        {"task": "Etwas aufräumen oder putzen", "completed": False},
+        {"task": "Etwas aufraeumen oder putzen", "completed": False},
         {"task": "Mindestens eine Stunde Handypause", "completed": False}
     ]
 
