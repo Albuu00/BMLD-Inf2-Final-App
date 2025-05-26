@@ -4,45 +4,32 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 
 # Beispiel-Daten (ersetze dies durch deine echten To-Do-Daten)
-#data = [
-    #{"task": "2 Liter Wasser trinken", "completed": True, "date": "2025-05-01"},
-    #{"task": "2 Liter Wasser trinken", "completed": False, "date": "2025-05-02"},
-    #{"task": "Spazieren", "completed": True, "date": "2025-05-03"},
-    #{"task": "Spazieren", "completed": True, "date": "2025-05-04"},
-    #{"task": "10 Minuten Dehnen", "completed": False, "date": "2025-05-05"},
-    #{"task": "10 Minuten Dehnen", "completed": True, "date": "2025-05-06"},
-    #{"task": "Mindestens eine Frucht gegessen", "completed": True, "date": "2025-05-07"},
-    #{"task": "Mindestens eine Frucht gegessen", "completed": False, "date": "2025-05-08"},
-#]
+data = [
+    {"task": "2 Liter Wasser trinken", "completed": True, "date": "2025-05-01"},
+    {"task": "2 Liter Wasser trinken", "completed": False, "date": "2025-05-02"},
+    {"task": "Spazieren", "completed": True, "date": "2025-05-03"},
+    {"task": "Spazieren", "completed": True, "date": "2025-05-04"},
+    {"task": "10 Minuten Dehnen", "completed": False, "date": "2025-05-05"},
+    {"task": "10 Minuten Dehnen", "completed": True, "date": "2025-05-06"},
+    {"task": "Mindestens eine Frucht gegessen", "completed": True, "date": "2025-05-07"},
+    {"task": "Mindestens eine Frucht gegessen", "completed": False, "date": "2025-05-08"},
+]
 
-#df = pd.DataFrame(data)
+df = pd.DataFrame(data)
 
-# Sicherstellen, dass st.session_state.todos initialisiert ist
-if "todos" not in st.session_state or not st.session_state.todos:
-    st.error("Keine To-Do-Daten verfügbar. Bitte füge zuerst To-Dos hinzu.")
-    st.stop()
-
-# Daten aus st.session_state.todos laden
-df = pd.DataFrame(st.session_state.todos)
-
-# Überprüfen, ob die notwendigen Spalten vorhanden sind
-required_columns = {"task", "completed", "timestamp"}
-if not required_columns.issubset(df.columns):
-    st.error(f"Die To-Do-Daten müssen die folgenden Spalten enthalten: {', '.join(required_columns)}")
-    st.stop()
-
-# Datum aus dem Zeitstempel extrahieren
-df["date"] = pd.to_datetime(df["timestamp"], errors="coerce").dt.date
-df = df.dropna(subset=["date"])  # Ungültige Datumswerte entfernen
+# Spalte "date" in datetime umwandeln
+df["date"] = pd.to_datetime(df["date"], errors="coerce")
 
 # Zeitraum-Auswahl
 duration = st.selectbox("Zeitraum auswählen:", ["pro Woche", "pro Monat"])
 
 # Zeitraum berechnen
 if duration == "pro Monat":
-    df["period"] = pd.to_datetime(df["date"]).dt.to_period("M").dt.start_time  # Monat als Startdatum
+    df["period"] = df["date"].dt.to_period("M").dt.start_time  # Monat als Startdatum
+
 else:
-    df["period"] = pd.to_datetime(df["date"]).dt.to_period("W").dt.start_time  # Woche als Startdatum
+    df["period"] = df["date"].dt.to_period("W").dt.start_time  # Woche als Startdatum
+
 
 # Gruppieren und zählen: Erfüllte und nicht erfüllte To-Dos
 completed = df[df["completed"]].groupby(["period", "task"]).size().unstack(fill_value=0)
