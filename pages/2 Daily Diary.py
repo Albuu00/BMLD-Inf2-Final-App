@@ -70,15 +70,36 @@ if st.button("Speichern"):
         # Diary Eintrag auf Switchdrive speichern
 
 # Gespeicherte Einträge anzeigen
+#st.subheader("Deine bisherigen Einträge")
+#try:
+    #if not st.session_state.dailydiary.empty:
+        #for index, row in st.session_state.dailydiary.iterrows():
+            # Einträge mit Emojis anzeigen
+            #st.markdown(f"**Datum:** {row['date']} **Zeit:** {row['time']}")
+            #st.markdown(f"> {row['entry']}")
+            #st.markdown(f"**Zufriedenheit:** {row['satisfaction']}")
+            #st.markdown("---")  # Trennlinie zwischen Einträgen
+    #else:
+     #   st.info("Es gibt noch keine gespeicherten Einträge.")
+#except Exception as e:
+   # st.error(f"Fehler beim Anzeigen der Einträge: {e}")
+
+# Button zum Löschen der Aufgabe
 st.subheader("Deine bisherigen Einträge")
 try:
     if not st.session_state.dailydiary.empty:
         for index, row in st.session_state.dailydiary.iterrows():
-            # Einträge mit Emojis anzeigen
-            st.markdown(f"**Datum:** {row['date']} **Zeit:** {row['time']}")
-            st.markdown(f"> {row['entry']}")
-            st.markdown(f"**Zufriedenheit:** {row['satisfaction']}")
-            st.markdown("---")  # Trennlinie zwischen Einträgen
+            col1, col2 = st.columns([0.9, 0.1])
+            with col1:
+                st.markdown(f"**Datum:** {row['date']} **Zeit:** {row['time']}")
+                st.markdown(f"> {row['entry']}")
+                st.markdown(f"**Zufriedenheit:** {row['satisfaction']}")
+            with col2:
+                if st.button("🗑️", key=f"delete_{index}"):
+                    st.session_state.dailydiary = st.session_state.dailydiary.drop(index).reset_index(drop=True)
+                    DataManager().save_data(session_state_key="dailydiary")
+                    st.rerun()
+            st.markdown("---")
     else:
         st.info("Es gibt noch keine gespeicherten Einträge.")
 except Exception as e:

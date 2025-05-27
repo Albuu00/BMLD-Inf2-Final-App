@@ -114,8 +114,6 @@ if st.button("Hinzufügen"):
         # Neues To-Do erstellen
         new_todo_entry = {"task": new_todo.strip(), "completed": False, "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
         
-        # Neues To-Do zur Session-State-Liste hinzufügen
-        st.session_state.todos.append(new_todo_entry)
         
         # Änderungen in der persistenten Speicherung aktualisieren
         DataManager().append_record(session_state_key="todos", record_dict=new_todo_entry)
