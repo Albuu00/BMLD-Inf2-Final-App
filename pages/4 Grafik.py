@@ -3,22 +3,24 @@ import streamlit as st
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 
-# Beispiel-Daten (ersetze dies durch deine echten To-Do-Daten)
-data = [
-    {"task": "2 Liter Wasser trinken", "completed": True, "date": "2025-05-01"},
-    {"task": "2 Liter Wasser trinken", "completed": False, "date": "2025-05-02"},
-    {"task": "Spazieren", "completed": True, "date": "2025-05-03"},
-    {"task": "Spazieren", "completed": True, "date": "2025-05-04"},
-    {"task": "10 Minuten Dehnen", "completed": False, "date": "2025-05-05"},
-    {"task": "10 Minuten Dehnen", "completed": True, "date": "2025-05-06"},
-    {"task": "Mindestens eine Frucht gegessen", "completed": True, "date": "2025-05-07"},
-    {"task": "Mindestens eine Frucht gegessen", "completed": False, "date": "2025-05-08"},
-]
+# Sicherstellen, dass die Daten in st.session_state vorhanden sind
+if "todos" not in st.session_state or not st.session_state["todos"]:
+    st.info("Keine To-Do-Daten verfügbar. Bitte fügen Sie To-Dos auf der Startseite hinzu.")
+    st.stop()
 
+# Daten aus st.session_state laden
+data = st.session_state["todos"]
 df = pd.DataFrame(data)
+
+# Überprüfen, ob die notwendigen Spalten vorhanden sind
+required_columns = {"task", "completed", "date"}
+if not required_columns.issubset(df.columns):
+    st.error(f"Die To-Do-Daten müssen die folgenden Spalten enthalten: {', '.join(required_columns)}")
+    st.stop()
 
 # Spalte "date" in datetime umwandeln
 df["date"] = pd.to_datetime(df["date"], errors="coerce")
+df = df.dropna(subset=["date"])  # Ungültige Datumswerte entfernen
 
 # Zeitraum-Auswahl
 duration = st.selectbox("Zeitraum auswählen:", ["pro Woche", "pro Monat"])

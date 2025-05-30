@@ -101,6 +101,7 @@ else:
 def toggle_task(index):
     # Status der Aufgabe umschalten
     st.session_state.todos[index]["completed"] = not st.session_state.todos[index]["completed"]
+    st.session_state.todos[index]["date"] = datetime.now().strftime("%Y-%m-%d")
     
     # xÄnderungen in der persistenten Speicherung aktualisieren
     DataManager().save_data(session_state_key="todos")
@@ -112,7 +113,7 @@ new_todo = st.text_input("Gib ein neues To-Do ein (Achtung, keine Umlaute verwen
 if st.button("Hinzufügen"):
     if new_todo.strip():  # Überprüfen, ob das Eingabefeld nicht leer ist
         # Neues To-Do erstellen
-        new_todo_entry = {"task": new_todo.strip(), "completed": False, "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+        new_todo_entry = {"task": new_todo.strip(), "completed": False, "date": datetime.now().strftime("%Y-%m-%d")}
         
         
         # Änderungen in der persistenten Speicherung aktualisieren
