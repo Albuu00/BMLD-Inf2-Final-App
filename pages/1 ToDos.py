@@ -141,4 +141,18 @@ for i, todo in enumerate(st.session_state.todos):
             st.session_state.todos.pop(i)
             DataManager().save_data(session_state_key="todos")  # Änderungen speichern
             st.rerun()
+
+# Navigation zwischen den Seiten
+st.markdown("---")  # Trennlinie für bessere Übersicht
+col1, col2, col3 = st.columns([1, 1, 1])
+
+with col1:
+    if st.button("Zurück zur Startseite"):
+        st.switch_page("Start.py")
+        
+
+with col3:
+    if st.button("Weiter zum Daily Diary"):
+        st.switch_page("pages/2 Daily Diary.py")
+        
             

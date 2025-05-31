@@ -81,5 +81,5 @@ with col3:
     if st.button("Daten"):
         st.switch_page("pages/3 Daten.py")
 with col4:
-    if st.button("Grafik"):
+    if st.button("Erfolgsübersicht"):
         st.switch_page("pages/4 Grafik.py")
