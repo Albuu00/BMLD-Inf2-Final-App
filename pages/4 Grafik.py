@@ -58,3 +58,4 @@ ax.set_xticks(completed.index)
 ax.set_xticklabels(completed.index.strftime("%d.%m.%y"), rotation=45)  # X-Achse formatieren
 ax.legend()  # Legende hinzufügen
 st.pyplot(fig)
+
