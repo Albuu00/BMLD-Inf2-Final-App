@@ -37,6 +37,10 @@ else:
 completed = df[df["completed"]].groupby(["period", "task"]).size().unstack(fill_value=0)
 not_completed = df[~df["completed"]].groupby(["period", "task"]).size().unstack(fill_value=0)
 
+# Sicherstellen, dass die Werte ganze Zahlen sind
+completed = completed.astype(int)
+not_completed = not_completed.astype(int)
+
 # Diagramm erstellen
 st.subheader("To-Do Übersicht")
 fig, ax = plt.subplots(figsize=(12, 6))
@@ -53,9 +57,19 @@ for task in not_completed.columns:
 ax.set_title("To-Do Übersicht pro Zeitraum")
 ax.set_xlabel("Zeitraum")
 ax.set_ylabel("Anzahl")
+
+# Y-Achse auf ganze Zahlen beschränken
 ax.yaxis.set_major_locator(MaxNLocator(integer=True))  # Ganze Zahlen auf der Y-Achse
-ax.set_xticks(completed.index)
-ax.set_xticklabels(completed.index.strftime("%d.%m.%y"), rotation=45)  # X-Achse formatieren
-ax.legend()  # Legende hinzufügen
+
+# Sicherstellen, dass die Y-Achse keine Dezimalzahlen anzeigt
+ax.set_ylim(bottom=0)  # Setzt den unteren Grenzwert der Y-Achse auf 0
+ax.yaxis.get_major_locator().set_params(integer=True)  # Erzwingt ganze Zahlen auf der Y-Achse
+
+# X-Achse formatieren
+ax.set_xticks(completed.index.union(not_completed.index))  # Alle Zeiträume anzeigen
+ax.set_xticklabels(completed.index.union(not_completed.index).strftime("%d.%m.%y"), rotation=45)
+
+# Legende hinzufügen
+ax.legend()  
 st.pyplot(fig)
 
