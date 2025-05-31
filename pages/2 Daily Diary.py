@@ -111,9 +111,9 @@ st.markdown("---")  # Trennlinie für bessere Übersicht
 col1, col2, col3 = st.columns([1, 1, 1])
 
 with col1:
-    if st.button("Zurück zu den ToDos)"):
+    if st.button("Zurück zu den ToDos"):
         st.switch_page("pages/1 ToDos.py")
 
 with col3:
-    if st.button("Weiter zu den Daten)"):
+    if st.button("Weiter zu den Daten"):
         st.switch_page("pages/3 Daten.py")

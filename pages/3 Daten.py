@@ -92,9 +92,9 @@ st.markdown("---")  # Trennlinie für bessere Übersicht
 col1, col2, col3 = st.columns([1, 1, 1])
 
 with col1:
-    if st.button("Zurück zum Daily Diary)"):
+    if st.button("Zurück zum Daily Diary"):
         st.switch_page("pages/2 Daily Diary.py")
 
 with col3:
-    if st.button("Weiter zur Erfolgsübersicht)"):
+    if st.button("Weiter zur Erfolgsübersicht"):
         st.switch_page("pages/4 Grafik.py")
