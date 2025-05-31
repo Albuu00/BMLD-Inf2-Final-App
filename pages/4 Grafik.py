@@ -41,6 +41,10 @@ not_completed = df[~df["completed"]].groupby(["period", "task"]).size().unstack(
 completed = completed.astype(int)
 not_completed = not_completed.astype(int)
 
+# Summieren der To-Dos über den Zeitraum
+completed_sum = completed.groupby(level=0).sum()  # Summiere alle erfüllten To-Dos pro Zeitraum
+not_completed_sum = not_completed.groupby(level=0).sum()  # Summiere alle nicht erfüllten To-Dos pro Zeitraum
+
 # Diagramm erstellen
 st.subheader("To-Do Übersicht")
 fig, ax = plt.subplots(figsize=(12, 6))
