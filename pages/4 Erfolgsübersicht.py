@@ -69,7 +69,7 @@ completed_sum = completed.groupby(level=0).sum()  # Summiere alle erfüllten To-
 not_completed_sum = not_completed.groupby(level=0).sum()  # Summiere alle nicht erfüllten To-Dos pro Zeitraum
 
 # Diagramm erstellen
-st.subheader("To-Do Übersicht")
+st.subheader("Erfolgsübersicht")
 fig, ax = plt.subplots(figsize=(12, 6))
 
 # Summierte Werte für erfüllte To-Dos plotten
