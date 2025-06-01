@@ -1,8 +1,8 @@
 import pandas as pd
 import os
+import streamlit as st
 from utils.data_manager import DataManager
 from utils.login_manager import LoginManager
-import streamlit as st
 
 # Initialisierung des Data Managers (hier mit Verbindung zu SwitchDrive)
 data_manager = DataManager(fs_protocol='webdav', fs_root_folder="HealthySync") 
