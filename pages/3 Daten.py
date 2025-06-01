@@ -38,8 +38,8 @@ else:
     df["period"] = "Gesamt"
 
 # Gruppieren nach Erfüllungsstatus
-erfüllte = df[df["completed"]].groupby(["period", "task"]).size().unstack(fill_value=0)
-nicht_erfüllte = df[~df["completed"]].groupby(["period", "task"]).size().unstack(fill_value=0)
+erfüllte = df[df["completed"] == True].groupby(["period", "task"]).size().unstack(fill_value=0)
+nicht_erfüllte = df[df["completed"] == False].groupby(["period", "task"]).size().unstack(fill_value=0)
 
 # ✅ Erfüllte To-Dos anzeigen
 st.subheader("✅ Erfüllte To-Dos")
