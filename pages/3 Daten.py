@@ -86,4 +86,4 @@ with col1:
 
 with col3:
     if st.button("Weiter zur Erfolgsübersicht"):
-        st.switch_page("pages/4 Grafik.py")
+        st.switch_page("pages/4 Erfolgsübersicht.py")
