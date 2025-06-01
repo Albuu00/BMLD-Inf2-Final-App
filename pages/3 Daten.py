@@ -11,42 +11,32 @@ from datetime import datetime
 st.title("Übersicht der To-Dos")
 
 # To-Do-Daten in ein DataFrame umwandeln
-if "todos" in st.session_state and st.session_state.todos:
+if st.session_state.todos:
     df = pd.DataFrame(st.session_state.todos)
-
-    # Spalte "date" prüfen und Datumsformat sicherstellen
-    if "date" not in df.columns:
-        df["date"] = datetime.now().strftime("%Y-%m-%d")
-    df["date"] = pd.to_datetime(df["date"], errors="coerce")
-    df = df.dropna(subset=["date"])
-
-    if df.empty:
-        st.warning("Keine gültigen Datumseinträge vorhanden. Es können keine To-Dos angezeigt werden.")
-        st.stop()
+    df["date"] = pd.to_datetime(df.get("timestamp", datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
 else:
     df = pd.DataFrame(columns=["task", "completed", "date"])
 
-# Zeitraum-Auswahl
+# Zeitraum auswählen
 zeitraum = st.selectbox("Zeitraum auswählen:", ["Gesamt", "Woche", "Monat"])
 
-# Zeitraum-Spalte berechnen
+# Daten filtern nach Zeitraum
 if zeitraum == "Woche":
-    df["period"] = df["date"].dt.to_period("W").apply(lambda r: r.start_time)  # Startdatum der Woche
+    df["period"] = df["date"].dt.to_period("W").dt.start_time
 elif zeitraum == "Monat":
-    df["period"] = df["date"].dt.to_period("M").apply(lambda r: r.start_time)  # Startdatum des Monats
+    df["period"] = df["date"].dt.to_period("M").dt.start_time
 else:
     df["period"] = "Gesamt"
 
-# Gruppieren nach Erfüllungsstatus
-erfüllte = df[df["completed"] == True].groupby(["period", "task"]).size().unstack(fill_value=0)
-nicht_erfüllte = df[df["completed"] == False].groupby(["period", "task"]).size().unstack(fill_value=0)
+# Gruppieren und zählen
+erfüllte = df[df["completed"]].groupby(["period", "task"]).size().unstack(fill_value=0)
+nicht_erfüllte = df[~df["completed"]].groupby(["period", "task"]).size().unstack(fill_value=0)
 
 # ✅ Erfüllte To-Dos anzeigen
 st.subheader("✅ Erfüllte To-Dos")
 if not erfüllte.empty:
     for period, tasks in erfüllte.iterrows():
-        zeitraum_label = period.strftime('%d.%m.%Y') if period != "Gesamt" else "Gesamt"
-        st.markdown(f"**Zeitraum:** {zeitraum_label}")
+        st.markdown(f"**Zeitraum:** {period.strftime('%d.%m.%Y') if period != 'Gesamt' else 'Gesamt'}")
         for task, count in tasks.items():
             st.markdown(f"- {task}: {count}x")
 else:
@@ -56,8 +46,7 @@ else:
 st.subheader("❌ Nicht erfüllte To-Dos")
 if not nicht_erfüllte.empty:
     for period, tasks in nicht_erfüllte.iterrows():
-        zeitraum_label = period.strftime('%d.%m.%Y') if period != "Gesamt" else "Gesamt"
-        st.markdown(f"**Zeitraum:** {zeitraum_label}")
+        st.markdown(f"**Zeitraum:** {period.strftime('%d.%m.%Y') if period != 'Gesamt' else 'Gesamt'}")
         for task, count in tasks.items():
             st.markdown(f"- {task}: {count}x")
 else:
