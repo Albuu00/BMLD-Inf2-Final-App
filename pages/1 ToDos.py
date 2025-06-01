@@ -85,9 +85,6 @@ default_todos = [
 if "todos" not in st.session_state:
     st.session_state.todos = default_todos.copy()
 else:
-    # Debugging: Überprüfe den Inhalt von todos
-    #st.write("Aktueller Inhalt von todos:", st.session_state.todos)
-
     # Filtere ungültige Elemente aus todos
     st.session_state.todos = [todo for todo in st.session_state.todos if isinstance(todo, dict) and "task" in todo]
 
@@ -114,7 +111,6 @@ if st.button("Hinzufügen"):
     if new_todo.strip():  # Überprüfen, ob das Eingabefeld nicht leer ist
         # Neues To-Do erstellen
         new_todo_entry = {"task": new_todo.strip(), "completed": False, "date": datetime.now().strftime("%Y-%m-%d")}
-        
         
         # Änderungen in der persistenten Speicherung aktualisieren
         DataManager().append_record(session_state_key="todos", record_dict=new_todo_entry)
