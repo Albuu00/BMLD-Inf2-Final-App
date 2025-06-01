@@ -59,6 +59,7 @@ data_manager.load_user_data(
 # Titel der Anwendung
 st.markdown("<h1 style='color:turquoise;'>HealthySync</h1>", unsafe_allow_html=True)
 
+st.markdown("""HealthySync ist ein Todo Reminder, der dir hilft, deine täglichen Aufgaben zu organisieren und zu verfolgen.""")
 # Autoren und Beschreibung
 st.markdown("""
 ### Autoren:
@@ -66,7 +67,6 @@ st.markdown("""
 - **Simona Flachsmann** (flachsim@students.zhaw.ch)
 - **Aylin Ago** (agoayl01@students.zhaw.ch)
 
-HealthySync ist ein Todo Reminder, der dir hilft, deine täglichen Aufgaben zu organisieren und zu verfolgen.
 """)
 # Buttons nebeneinander anzeigen
 col1, col2, col3, col4 = st.columns(4)
