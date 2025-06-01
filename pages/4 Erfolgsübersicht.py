@@ -47,6 +47,10 @@ if not required_columns.issubset(df.columns):
 df["date"] = pd.to_datetime(df["date"], errors="coerce")
 df = df.dropna(subset=["date"])  # Ungültige Datumswerte entfernen
 
+# Sicherstellen, dass die Spalte 'completed' boolesche Werte enthält
+if df["completed"].dtype != bool:
+    df["completed"] = df["completed"].astype(bool)
+
 # Zeitraum-Auswahl
 duration = st.selectbox("Zeitraum auswählen:", ["pro Woche", "pro Monat"])
 
@@ -56,46 +60,47 @@ if duration == "pro Monat":
 else:
     df["period"] = df["date"].dt.to_period("W").dt.start_time  # Woche als Startdatum
 
-# Gruppieren und zählen: Erfüllte und nicht erfüllte To-Dos
+
+# Gruppieren und zählen: Erfüllte To-Dos
 completed = df[df["completed"]].groupby(["period", "task"]).size().unstack(fill_value=0)
-not_completed = df[~df["completed"]].groupby(["period", "task"]).size().unstack(fill_value=0)
 
 # Sicherstellen, dass die Werte ganze Zahlen sind
 completed = completed.astype(int)
-not_completed = not_completed.astype(int)
 
 # Summieren der To-Dos über den Zeitraum
 completed_sum = completed.groupby(level=0).sum()  # Summiere alle erfüllten To-Dos pro Zeitraum
-not_completed_sum = not_completed.groupby(level=0).sum()  # Summiere alle nicht erfüllten To-Dos pro Zeitraum
 
-# Diagramm erstellen
-st.subheader("Erfolgsübersicht")
-fig, ax = plt.subplots(figsize=(12, 6))
+# Diagramm für erfüllte To-Dos als Säulendiagramm erstellen
+st.subheader("✅ Erfüllte To-Dos")
+fig1, ax1 = plt.subplots(figsize=(12, 6))
 
-# Summierte Werte für erfüllte To-Dos plotten
-ax.plot(completed_sum.index, completed_sum.sum(axis=1), label="Erfüllte To-Dos", marker="o")
+# Breite der Säulen und Abstand
+bar_width = 0.3  # Breite der Säulen
+spacing = 0.4  # Abstand zwischen den Säulen
+x_positions = range(len(completed.index))  # Positionen der Zeiträume auf der X-Achse
 
-# Summierte Werte für nicht erfüllte To-Dos plotten
-ax.plot(not_completed_sum.index, not_completed_sum.sum(axis=1), label="Nicht erfüllte To-Dos", linestyle="--", marker="x")
+# Jede Aufgabe einzeln plotten
+colors = plt.cm.tab10.colors  # Farbpalette
+tasks = completed.columns  # Liste der Aufgaben
+for i, task in enumerate(tasks):
+    ax1.bar(
+        [x + i * (bar_width + spacing) for x in x_positions],  # Verschiebe jede Säule um die Breite + Abstand
+        completed[task],  # Anzahl der erledigten To-Dos für die Aufgabe
+        width=bar_width,
+        label=task,
+        color=colors[i % len(colors)]  # Zyklische Farbzuweisung
+    )
 
 # Diagramm formatieren
-ax.set_title("To-Do Übersicht pro Zeitraum")
-ax.set_xlabel("Zeitraum")
-ax.set_ylabel("Anzahl")
+ax1.set_title("Erfüllte To-Dos pro Zeitraum")
+ax1.set_xlabel("Zeitraum")
+ax1.set_ylabel("Anzahl")
+ax1.set_xticks([x + (len(tasks) * (bar_width + spacing) - spacing) / 2 for x in x_positions])  # Zentriere die Labels
+ax1.set_xticklabels(completed.index.strftime("%d.%m.%y"), rotation=45)  # Zeiträume als Labels
+ax1.yaxis.set_major_locator(MaxNLocator(integer=True))  # Ganze Zahlen auf der Y-Achse
+ax1.legend(title="Aufgaben")  # Legende mit Titel
+st.pyplot(fig1)
 
-# Y-Achse auf ganze Zahlen beschränken
-ax.yaxis.set_major_locator(MaxNLocator(integer=True))  # Ganze Zahlen auf der Y-Achse
-
-# Sicherstellen, dass die Y-Achse keine Dezimalzahlen anzeigt
-ax.set_ylim(bottom=0)  # Setzt den unteren Grenzwert der Y-Achse auf 0
-
-# X-Achse formatieren
-ax.set_xticks(completed_sum.index)  # Alle Zeiträume anzeigen
-ax.set_xticklabels(completed_sum.index.strftime("%d.%m.%y"), rotation=45)
-
-# Legende hinzufügen
-ax.legend()
-st.pyplot(fig)
 
 # Navigation zwischen den Seiten
 st.markdown("---")  # Trennlinie für bessere Übersicht

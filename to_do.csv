@@ -1,13 +1,16 @@
 task,completed,date
-2 Liter Wasser trinken,False,
 Mindestens ein Gemuese gegessen,True,2025-06-01
+Mindestens eine Stunde Handypause,True,2025-06-01
+2 Liter Wasser trinken,False,
 10 Minuten Dehnen,False,
-Mindestens eine Stunde Handypause,False,
-2 Liter Wasser trinken,True,2025-06-01
 Spazieren,False,
-10 Minuten Dehnen,True,2025-06-01
 Mindestens eine Frucht gegessen,False,
+2 Liter Wasser trinken,True,2025-06-01
+Spazieren,True,2025-06-01
+10 Minuten Dehnen,True,2025-06-01
+Mindestens eine Frucht gegessen,True,2025-06-01
 Mindestens ein Gemuese gegessen,False,
 7 bis 8 Stunden geschlafen,False,
 Etwas aufraeumen oder putzen,False,
-Mindestens eine Stunde Handypause,True,2025-06-01
+Mindestens eine Stunde Handypause,False,
+lesen,True,2025-06-01
